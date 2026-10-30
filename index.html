@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#172B68">
+<meta name="color-scheme" content="light">
+<title>VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Brand palette (project visual guideline) */
+  --midnight:#172B68; --brick:#7E1B1E; --gold:#E7A740; --teal:#1E8481;
+  --slate:#1D3256; --powder:#C3CDEB; --purple:#5B1E6B; --lilac:#A56A9A;
+  --pearl:#F2ECE0; --card:#FAF8F3; --slategrey:#DCDCDC; --elephant:#B5B5AF; --biscuit:#BB8667;
+  --text:#1D3256; --muted:#5A6378; --bg:#FFFFFF; --err:#7E1B1E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font-family:Lato,Aptos,"Noto Sans Devanagari","Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.45;
+  padding-left:6px;-webkit-text-size-adjust:100%;min-height:100vh}
+/* Signature tri-colour stripe from the guide */
+body:before{content:"";position:fixed;left:0;top:0;bottom:0;width:6px;z-index:50;
+  background:linear-gradient(to bottom,var(--midnight) 0 33.3%,var(--brick) 33.3% 66.6%,var(--gold) 66.6% 100%)}
+h1,h2,h3,.slab{font-family:"Roboto Slab",Georgia,"Noto Serif Devanagari",serif;color:var(--midnight);margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px 120px}
+
+/* Header */
+header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:2px solid var(--gold)}
+.hd{max-width:720px;margin:0 auto;padding:10px 14px 8px;display:flex;align-items:center;gap:10px}
+.brand{flex:1;min-width:0}
+.brand h1{font-size:21px;line-height:1.1}
+.apptitle{font-family:"Roboto Slab",Georgia,"Noto Serif Devanagari",serif;color:var(--midnight);font-weight:700;font-size:17px;line-height:1.3;margin:0}
+.hd .brand{padding:2px 0}
+.brand small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lang{display:flex;border:1.5px solid var(--midnight);border-radius:8px;overflow:hidden;flex:none}
+.lang button{border:0;background:#fff;padding:4px 10px;font-size:14px;font-weight:700;color:var(--midnight);min-height:34px}
+.lang button.on{background:var(--midnight);color:#fff}
+.statusbar{max-width:720px;margin:0 auto;padding:0 14px 8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:20px;background:var(--pearl);color:var(--slate)}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.chip.on .dot{background:var(--teal)} .chip.off .dot{background:var(--brick)}
+.chip.pend{background:#FBEFD9;color:#6b4a10}
+.chip.saved{background:transparent;color:var(--muted);font-weight:400}
+.iconbtn{border:0;background:transparent;padding:6px;min-width:36px;min-height:36px;border-radius:8px;color:var(--midnight)}
+.iconbtn svg{width:22px;height:22px;display:block}
+
+/* Cards & sections */
+.card{background:var(--card);border:1px solid #E7E1D3;border-radius:10px;padding:14px;margin:14px 0;box-shadow:0 1px 3px rgba(29,50,86,.08)}
+.sec-title{font-size:19px;margin:18px 0 4px;display:flex;gap:8px;align-items:center}
+.sec-title .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--midnight);color:#fff;font:700 14px/26px Lato,sans-serif;text-align:center}
+.rule{height:2px;background:var(--gold);border:0;margin:6px 0 4px;width:64px}
+.q{margin:14px 0}
+.q label.ql{display:block;font-weight:700;color:var(--slate);margin-bottom:5px}
+.q .req{color:var(--brick)}
+.hint{font-size:13.5px;color:var(--muted);margin:-2px 0 6px}
+input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+  width:100%;border:1.5px solid var(--elephant);background:#fff;border-radius:8px;padding:11px 12px;min-height:48px;font-size:16px;outline:none}
+textarea{min-height:76px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:var(--midnight);box-shadow:0 0 0 3px rgba(23,43,104,.15)}
+input[readonly]{background:var(--pearl);color:var(--slate);font-weight:700}
+.q.bad input,.q.bad select,.q.bad textarea{border-color:var(--err);background:#FFF7F7}
+.errmsg{color:var(--err);font-size:13.5px;font-weight:700;margin-top:4px}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:10px;background:var(--powder);color:var(--midnight);margin-left:6px;vertical-align:middle}
+.badge.edit{background:#F6E2C0;color:#6b4a10}
+.badge.red{background:#F3D9D9;color:var(--brick)}
+.note{font-size:13.5px;background:#EEF1FA;border-left:4px solid var(--midnight);padding:8px 10px;border-radius:6px;margin:8px 0;color:var(--slate)}
+.note.warn{background:#FDF3E1;border-color:var(--gold)}
+.note.bad{background:#FBECEC;border-color:var(--brick);color:var(--brick)}
+
+/* Typeahead */
+.ta{position:relative}
+.sugg{border:1.5px solid var(--midnight);border-top:0;border-radius:0 0 8px 8px;background:#fff;max-height:280px;overflow:auto;margin-top:-4px}
+.sugg button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #EEE;background:#fff;padding:10px 12px;font-size:15px}
+.sugg button:active{background:var(--powder)}
+.sugg b{color:var(--midnight)} .sugg small{display:block;color:var(--muted);font-size:12.5px}
+.sugg .more{padding:8px 12px;font-size:13px;color:var(--muted)}
+
+/* Choice chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{flex:1 1 40%;display:flex;align-items:center;gap:8px;border:1.5px solid var(--elephant);border-radius:8px;padding:10px 12px;background:#fff;font-weight:700;min-height:48px}
+.chips input{width:20px;height:20px;accent-color:var(--midnight)}
+.chips label.on{border-color:var(--midnight);background:#EEF1FA}
+
+/* Repeat groups */
+.rep{border:1px solid #E7E1D3;border-left:4px solid var(--teal);border-radius:8px;background:#fff;padding:10px 12px;margin:10px 0}
+.rep h3{font-size:16px;color:var(--teal)}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.grid3 .q{margin:8px 0 0}
+.grid3 label.ql{font-size:14px}
+.tot{display:flex;justify-content:space-between;background:var(--midnight);color:#fff;border-radius:8px;padding:10px 12px;font-weight:700;margin-top:10px}
+
+/* Buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:10px;min-height:50px;padding:12px 16px;font-weight:700;font-size:16.5px;cursor:pointer}
+.btn.pri{background:var(--midnight);color:#fff}
+.btn.gold{background:var(--gold);color:var(--slate)}
+.btn.teal{background:var(--teal);color:#fff}
+.btn.out{background:#fff;color:var(--midnight);border:1.5px solid var(--midnight)}
+.btn.ghost{background:transparent;color:var(--brick);min-height:40px;font-size:14.5px}
+.btn:disabled{opacity:.5}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+.navbar{position:fixed;left:6px;right:0;bottom:0;background:#fff;border-top:1px solid var(--slategrey);z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.navbar .in{max-width:720px;margin:0 auto}
+.prog{height:6px;background:var(--pearl);border-radius:4px;overflow:hidden;margin:10px 0 2px}
+.prog i{display:block;height:100%;background:var(--gold)}
+.steptxt{font-size:13px;color:var(--muted)}
+.modebar{display:flex;gap:6px;margin-top:10px}
+.modebar button{flex:1;border:1.5px solid var(--slategrey);background:#fff;border-radius:8px;padding:7px;font-size:13.5px;font-weight:700;color:var(--muted)}
+.modebar button.on{border-color:var(--teal);color:var(--teal);background:#EAF5F5}
+
+/* Home & lists */
+.hello{margin:16px 0 4px;font-size:22px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.tile{border:1px solid #E7E1D3;background:var(--card);border-radius:10px;padding:12px;text-align:left;min-height:84px}
+.tile .n{font:700 28px/1 "Roboto Slab",serif;color:var(--midnight)}
+.tile .l{font-size:13.5px;color:var(--slate);margin-top:6px;font-weight:700}
+.tile.p .n{color:var(--brick)} .tile.s .n{color:var(--teal)}
+.item{border:1px solid #E7E1D3;background:#fff;border-radius:10px;padding:12px;margin:10px 0}
+.item b{color:var(--midnight)}
+.item .meta{font-size:13px;color:var(--muted);margin:3px 0 8px}
+.item .acts{display:flex;gap:8px}
+.item .acts .btn{min-height:40px;font-size:14.5px;padding:8px}
+.tabs{display:flex;gap:6px;margin:14px 0 4px;overflow-x:auto}
+.tabs button{flex:1;white-space:nowrap;border:0;border-bottom:3px solid transparent;background:transparent;padding:8px 6px;font-weight:700;color:var(--muted);font-size:14.5px}
+.tabs button.on{color:var(--midnight);border-color:var(--gold)}
+.rv{font-size:14.5px}
+.rv dt{color:var(--muted);font-size:13px;margin-top:8px}
+.rv dd{margin:0;font-weight:700;color:var(--slate);word-break:break-word}
+.rv .edl{float:right;border:0;background:transparent;color:var(--teal);font-weight:700;font-size:14px;padding:4px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--slate);color:#fff;padding:10px 16px;border-radius:8px;font-size:14.5px;z-index:99;max-width:90%;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.done{text-align:center;padding:30px 10px}
+.done .ic{width:72px;height:72px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff}
+.instr{margin:0;padding-left:22px}.instr li{margin:0 0 9px;padding-left:2px}.instr li::marker{color:var(--brick);font-weight:700}
+.order{border-left:4px solid var(--brick)}.order .meta,.vtpinfo{font-size:13.5px;color:var(--muted)}
+.sub{font-weight:700;color:var(--slate);font-size:14.5px;margin:10px 0 0;padding-top:8px;border-top:1px dashed var(--slategrey)}
+.sub:first-of-type{border-top:0;padding-top:0}
+.tl{display:inline-block;margin-top:5px;background:#FBEFD9;color:#6b4a10;font-weight:700;font-size:13.5px;padding:3px 9px;border-radius:12px}
+.hide{display:none!important}
+footer{font-size:12px;color:var(--muted);text-align:center;margin-top:24px}
+</style>
+</head>
+<body>
+<header>
+  <div class="hd">
+    <div class="brand" onclick="go('info')" style="cursor:pointer"><h1 id="brandT" class="apptitle"></h1></div>
+  </div>
+  <div class="statusbar"><div id="statusBar" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;flex:1;min-width:0"></div>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lenBtn" data-lang="en">EN</button><button id="lhiBtn" data-lang="hi">हिंदी</button>
+    </div>
+    <button class="iconbtn" id="setBtn" aria-label="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+  </div>
+</header>
+<main class="wrap" id="view"></main>
+<div class="navbar hide" id="navbar"><div class="in" id="navIn"></div></div>
+
+<script>
+/* ================= CONFIG ================= */
+// Paste your Apps Script Web App URL (ends with /exec) here before hosting.
+var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlG27-6sfMSr8J2tCZyjutFfUatXbnqc09Q6Y1E_sdzxcfVC0Zz-1FUE_wWkZpIpd1/exec';
+var APP_VERSION = '2.4.0';
+// Optional starter VTP list (any VTP, not tied to district/sector/school).
+// The live list = "VTP_List" tab of the Google Sheet + every VTP name already submitted. Refreshed whenever online.
+var VTP_DEFAULT = ["AISECT", "Amass Skill Ventures Pvt. Ltd.", "Bentogreen", "DATAPRO Computers Pvt. Ltd.", "Empower Pragati Vocational and Staffing Pvt. Ltd.", "Funfirst Global Skillers Pvt. Ltd.", "Gramin Shiksha Pvt. Ltd.", "GRAS Education Training Services Pvt. Ltd.", "Indus Edutrain Pvt. Ltd.", "ITRC Technologies Pvt. Ltd.", "LabourNet Services India Pvt. Ltd.", "Mahendra Skills Training and Development Pvt. Ltd.", "Medhavi Foundation", "Pipal Tree Ventures Pvt. Ltd.", "Skill Tree Consulting Pvt. Ltd.", "Skills Root Edu Tech Consulting India Pvt. Ltd.", "Vision India Services Pvt. Ltd."];
+// Old / misspelt names → standard name (used for drafts and typed entries)
+var VTP_ALIAS = {'DATAPRO COMPURT Pvt. Ltd.':'DATAPRO Computers Pvt. Ltd.'};
+
+/* ---- Department letters / orders shown on the home page ----
+   Easiest way: add rows to the "Notices" tab of the Google Sheet (phones pick them up when online).
+   Or add them here and re-upload the app. Example:
+   {ref:'VE/2026-27/1234', date:'28-10-2026', subject_hi:'OJT हेतु निर्देश', subject_en:'Instructions for OJT',
+    details_hi:'…', details_en:'…', pdf:'letters/ve_1234.pdf'}     // pdf: Google Drive "anyone with link" URL, or a file uploaded next to index.html
+*/
+var DEPT_ORDERS_DEFAULT = [];
+
+/* ---- General (department) instructions & timeline – first section of the opening screen ----
+   Replace by adding rows with Type = "General" in the "Notices" tab, or edit here. date = timeline / deadline (optional). */
+var GENERAL_DEFAULT = {
+  hi:[{text:'यह सर्वेक्षण उत्तर प्रदेश के व्यावसायिक शिक्षा (VE) संचालित विद्यालयों में OJT एवं एक्सपोज़र विज़िट हेतु निकटतम स्थानों की पूर्व-सूचना एकत्र करने के लिए है।'},
+      {text:'प्रत्येक VE विद्यालय के प्रत्येक VT का विवरण निर्धारित समय-सीमा में भरा जाना है।', date:'विभागीय पत्र के अनुसार (शीघ्र सूचित की जाएगी)'},
+      {text:'सभी जानकारी सही एवं पूर्ण भरें। विभाग द्वारा इसी जानकारी के आधार पर OJT / एक्सपोज़र विज़िट की योजना बनाई जाएगी।'},
+      {text:'किसी भी समस्या के लिए अपने ज़िला समन्वयक / सुपरवाइज़र से संपर्क करें।'}],
+  en:[{text:'This survey collects pre-information on the nearest places for OJT and Exposure Visits in schools running Vocational Education (VE) in Uttar Pradesh.'},
+      {text:'Details of every VT in every VE school must be filled within the given timeline.', date:'As per department letter (to be informed soon)'},
+      {text:'Fill all information correctly and completely. The department will plan OJT / Exposure Visits based on this information.'},
+      {text:'For any problem, contact your district coordinator / supervisor.'}]
+};
+
+/* ================= PRELOAD ================= */
+var PRE = {"D":["Agra","Aligarh","Ambedkar Nagar","Amethi","Amroha","Auraiya","Ayodhya","Azamgarh","Baghpat","Bahraich","Ballia","Balrampur","Banda","Barabanki","Bareilly","Basti","Bhadohi","Bijnor","Budaun","Bulandshahr","Chandauli","Chitrakoot","Deoria","Etah","Etawah","Farrukhabad","Fatehpur","Firozabad","Gautam Buddha Nagar","Ghaziabad","Ghazipur","Gonda","Gorakhpur","Hamirpur","Hapur","Hardoi","Hathras","Jalaun","Jaunpur","Jhansi","Kannauj","Kanpur Dehat","Kanpur Nagar","Kasganj","Kaushambi","Kushinagar","Lakhimpur Kheri","Lalitpur","Lucknow","Maharajganj","Mahoba","Mainpuri","Mathura","Mau","Meerut","Mirzapur","Moradabad","Muzaffarnagar","Pilibhit","Pratapgarh","Prayagraj","Rae Bareli","Rampur","Saharanpur","Sambhal","Sant Kabir Nagar","Shahjahanpur","Shamli","Shravasti","Siddharthnagar","Sitapur","Sonbhadra","Sultanpur","Unnao","Varanasi"],"DH":["आगरा","अलीगढ़","अम्बेडकर नगर","अमेठी","अमरोहा","औरैया","अयोध्या","आज़मगढ़","बागपत","बहराइच","बलिया","बलरामपुर","बाँदा","बाराबंकी","बरेली","बस्ती","भदोही","बिजनौर","बदायूँ","बुलंदशहर","चंदौली","चित्रकूट","देवरिया","एटा","इटावा","फ़र्रुख़ाबाद","फ़तेहपुर","फ़िरोज़ाबाद","गौतम बुद्ध नगर","ग़ाज़ियाबाद","ग़ाज़ीपुर","गोंडा","गोरखपुर","हमीरपुर","हापुड़","हरदोई","हाथरस","जालौन","जौनपुर","झाँसी","कन्नौज","कानपुर देहात","कानपुर नगर","कासगंज","कौशाम्बी","कुशीनगर","लखीमपुर खीरी","ललितपुर","लखनऊ","महराजगंज","महोबा","मैनपुरी","मथुरा","मऊ","मेरठ","मिर्ज़ापुर","मुरादाबाद","मुज़फ़्फ़रनगर","पीलीभीत","प्रतापगढ़","प्रयागराज","रायबरेली","रामपुर","सहारनपुर","सम्भल","संत कबीर नगर","शाहजहाँपुर","शामली","श्रावस्ती","सिद्धार्थनगर","सीतापुर","सोनभद्र","सुल्तानपुर","उन्नाव","वाराणसी"],"S":[["9011400504","GGIC DEOBAND",63,"","2012-13",0,1],["9020501813","GGIC SISOULI",57,"Shaapur","2012-13",0,2],["9030109406","GGIC AFZALGARH",17,"Afzalgarh","2012-13",0,2],["9030208202","GIC KUNDIPURA",17,"","2012-13",0,3],["9030501608","GGIC JHALU",17,"","2012-13",0,1],["9040200118","GIC BHOJPUR",56,"","2012-13",0,3],["9041201221","SHIVHARI GGIC THAKURDWARA",56,"Thakurdwara","2012-13",1,2],["9061701042","GGIC GAJRAULA",4,"Gajraula","2012-13",0,2],["9062406724","AMBEDKAR GIC OJHARI",4,"Hasanpur","2012-13",0,3],["9071001904","GGIC KITHOR",54,"Kithore","2012-13",3,0],["9080203312","GGIC BAVLI",8,"Baraut","2012-13",1,2],["9080304608","GGIC DAHA",8,"Binauli","2012-13",0,2],["9090404624","GGIC KALCHINA",29,"","2012-13",2,1],["9090900315","GIC NANDGRAM",29,"","2012-13",0,3],["9100101804","GGIC BADALPUR",28,"","2012-13",0,1],["9100110913","GIC SECTOR 12",28,"","2012-13",0,3],["9110200115","GGIC SHIKARPUR",19,"Shikarpur","2012-13",1,2],["9110700117","GGIC BB NAGAR",19,"B B Nagar","2012-13",0,2],["9120305202","GGIC NARONA",1,"Atrauli","2012-13",0,2],["9130800710","GGIC HATHRAS",36,"Hathras","2012-13",0,2],["9140201706","GGIC FARAH",52,"Farah","2012-13",1,2],["9150405203","GGIC KALALKHEDIA",0,"Barauli Aheer","2012-13",0,1],["9151714173","GGIC AGRA",0,"","2012-13",0,2],["9160202503","GIC NASIRPUR",27,"","2012-13",0,3],["9160800112","GGIC JASRANA",27,"Jasrana","2012-13",0,1],["9170111309","CHAMPA DEVI GGIC RAJA KA RAMPUR",23,"","2012-13",0,1],["9180200123","GGIC GHIROR",51,"Ghiror","2012-13",3,1],["9180206802","SRI RAGHUVIR SINGH GIC",51,"Ghiror","2012-13",3,2],["9180811515","GGIC KARHAL, MAINPURI",51,"","2012-13",0,2],["9191600142","GGIC BISAULI",18,"","2012-13",0,1],["9192100288","GGIC",18,"","2012-13",0,2],["9200400830","GGIC NAWABGANJ",14,"Nawabganj","2012-13",1,2],["9200700205","GIC AGRAS",14,"","2012-13",0,3],["9210108317","GIC AMARIA",58,"Amaria","2012-13",3,2],["9220815101","GGIC TILHAR",66,"Tilhar","2012-13",1,2],["9221003412","GIC KALAN",66,"Kalan","2012-13",3,2],["9221405543","GGIC PUWAYAN",66,"","2012-13",3,0],["9241605008","GIC BANSURA",70,"","2012-13",3,1],["9241608212","GIC RAMPUR MATHURA",70,"","2012-13",0,3],["9250904203","GIC TADYAWAN",35,"","2012-13",0,2],["9252502106","GGIC HARDOI",35,"Hardoi","2012-13",2,0],["9261100114","GGIC ACHAL GANJ",73,"Sikandarpur Sarosi","2012-13",1,2],["9270100736","GGIC GOMTI NAGAR",48,"Lucknow","2012-13",0,1],["9270700612","GIC SAROJANI NAGAR",48,"","2012-13",0,3],["9270916507","GGIC INDIRA NAGAR",48,"Indira Nagar","2012-13",0,2],["9290700202","GIC FARRUKHABAD",25,"","2012-13",0,3],["9310601706","GIC SAIFAI",24,"","2012-13",0,1],["9330907717","GGIC RASULABAD",41,"Rasulabad","2012-13",0,2],["9340102922","GGIC NARWAL",42,"Narval","2012-13",0,1],["9340200109","GIC KHERSA BIDHNU",42,"","2012-13",0,1],["9340302810","GIC BHAUTI",42,"Kalyanpur","2012-13",0,3],["9350705204","GIC MUSMARIYA",37,"Maheva","2012-13",0,1],["9360106216","GIC RAKSA",39,"","2012-13",0,2],["9360305533","GGIC RANIPUR",39,"Bangra","2012-13",0,2],["9360306909","GIC KATERA",39,"","2012-13",0,1],["9370500119","GGIC MAHRONI",47,"","2012-13",0,2],["9400203608","GIC PAILANI",12,"Pailani","2012-13",0,3],["9400700113","GGIC KAMASIN",12,"Kamasin","2012-13",0,2],["9410304106","GIC BARGARH",21,"","2012-13",3,2],["9420400103","GGIC MALWAN",26,"","2012-13",0,1],["9420506904","GGIC SAILI",26,"Teliyani","2012-13",1,2],["9421110905","GIC GARHA",26,"","2012-13",0,3],["9430607301","GGIC MANIKPUR",59,"Kalakankar","2012-13",0,1],["9431807602","GIC SEKHUPUR",59,"","2012-13",0,3],["9450306508","GGIC JASARA",60,"Jasra","2012-13",0,1],["9451106008","GGIC SAIDABAD",60,"Saidabad","2012-13",0,2],["9452211107","GIC SURWADALAPUR MANDA",60,"","2012-13",0,3],["9460200106","GIC SIRAULI GAUSPUR",13,"Sirauli Gauspur","2012-13",3,1],["9460300108","GGIC DEWA",13,"Dewa","2012-13",0,1],["9460805708","GIC SURATGANJ",13,"","2012-13",3,1],["9461109908","GGIC SATRIKH",13,"Harakh","2012-13",0,1],["9470205405","GGIC BIKAPUR",6,"Bikapur","2012-13",0,1],["9470401503","GGIC GAUHANIA",6,"Masudha","2012-13",0,2],["9471004907","GGIC SALONIYA",6,"Saloniya","2012-13",1,2],["9480107905","GIC AKBARPUR",2,"Akbarpur","2012-13",0,3],["9480911206","G VIDYUT PARISHAD IC TANDA",2,"Tanda","2012-13",3,2],["9490403106","GGIC BHADAIYAN",72,"Bhadaiya","2012-13",1,2],["9491412509","GGIC KADIPUR",72,"","2012-13",0,1],["9500203010","GGIC KAISERGANJ",9,"","2012-13",0,1],["9500612301","GIC BHAGADWA",9,"Hujurpur","2012-13",2,3],["9500703604","GIC RAMPURWA",9,"","2012-13",0,1],["9521601002","GIC DARI CHAURA",11,"Shriduttganj","2012-13",0,1],["9531100605","GIC",31,"","2012-13",3,2],["9550905007","GGIC SONBARSA",15,"","2012-13",0,1],["9570403613","GIC PANIYARA",49,"Paniyara","2012-13",0,3],["9590607408","GGIC HATA",45,"Hata","2012-13",1,2],["9591501031","GGIC PADRAUNA",45,"Padrauna","2012-13",0,2],["9610701108","GGIC AMBARI",7,"Powai","2012-13",0,2],["9611703403","GGIC SARAIMIR",7,"Mirjapur","2012-13",3,2],["9621006101","GGIC MAU",53,"Pardaha","2012-13",0,2],["9631800503","GIC BALLIA",10,"Hanumanganj","2012-13",1,2],["9650102414","GGIC GAHMAR",30,"","2012-13",1,2],["9670605703","GGIC CHOLAPUR",74,"","2012-13",0,1],["9670900603","GGIC MALDAHIYA",74,"","2012-13",0,2],["9691301008","SW. KASHIRAM GGIC",55,"City","2012-13",0,1],["9721002619","GGIC PATIYALI",43,"Patiyali","2012-13",1,2],["9730301001","GGIC MUSAFIRKHANA",3,"Musafirkhana","2012-13",0,2],["9731700807","GIC INHAUNA",3,"Singhpur","2012-13",0,3],["9732502201","GIC FURSATGANJ",3,"","2012-13",3,2],["9741800155","GGIC KANDHLA",67,"Kandhla","2012-13",0,2],["9010602509","GOVT. BOYS INTER COLLEGE",63,"","2016-17",3,1],["9011010719","GGIC GAGALHEDI",63,"Puwarka","2016-17",0,2],["9021500266","GIC",57,"","2016-17",3,2],["9030704706","GGIC KIRATPUR",17,"Kiratpur","2016-17",1,3],["9031203905","GIC",17,"","2016-17",2,3],["9041402835","GGIC",56,"","2016-17",0,1],["9041505401","GIC",56,"Moradabad (Balak)","2016-17",3,1],["9050125506","GGIC SHAHBAD",62,"Shahabad","2016-17",0,1],["9050125507","GIC SHAHBAD",62,"","2016-17",3,1],["9050701903","GOVT KHURSHEED GIRLS IC",62,"","2016-17",0,1],["9062202551","GOVT. BOYS INTER COLLEGE",4,"","2016-17",3,1],["9071303611","GGIC",54,"","2016-17",1,0],["9080104909","GGIC",8,"Baghpat","2016-17",1,2],["9090900508","GGIC VIJAYNAGAR",29,"","2016-17",1,0],["9112900133","GGIC",19,"Bulandshahr","2016-17",2,3],["9121108012","SMT SAROJ SINGH GIC GORAI",1,"","2016-17",1,3],["9121307839","NAURANGI LAL GIC",1,"","2016-17",1,3],["9121307973","GGIC",1,"Lodha","2016-17",1,0],["9140112003","VDP GIC",52,"Mathura","2016-17",0,1],["9151711940","GIC",0,"","2016-17",3,1],["9160311004","GGIC TUNDLA",27,"","2016-17",1,0],["9171602102","GGIC",23,"Etah","2016-17",1,0],["9181002917","GGIC",51,"","2016-17",2,0],["9190800117","GGIC DATAGANJ",18,"","2016-17",3,1],["9201910704","GIC",14,"","2016-17",1,2],["9210904267","GGIC Pilibhit",58,"","2016-17",0,1],["9210904268","DRAMOND GIC",58,"","2016-17",3,1],["9221507402","GGIC",66,"","2016-17",0,2],["9231600236","GIC",46,"Lakhimpur","2016-17",1,2],["9231600237","GGIC",46,"","2016-17",1,0],["9240700109","GGIC",70,"","2016-17",0,1],["9241505705","GIC BEEHATGAUR",70,"","2016-17",1,3],["9242301416","GIC",70,"","2016-17",3,1],["9252500327","GIC",35,"Tn.Ar.Hardoi","2016-17",1,3],["9260802318","GGIC NAWABGANJ",73,"Nawabganj","2016-17",2,0],["9261702951","GGIC",73,"","2016-17",2,0],["9270916503","GGIC SHAHMEENA ROAD",48,"Lucknow","2016-17",0,1],["9270916505","GOVT. JUBLI IC CITY STATION",48,"","2016-17",3,1],["9280804204","JAWAHAR GIC SEMRI",61,"","2016-17",1,3],["9281003801","GGIC GURGUJ PUR",61,"","2016-17",0,1],["9282206102","SRI KB SINHA GGIC",61,"","2016-17",0,1],["9290703803","GGIC FATEHGARH",25,"","2016-17",0,1],["9300202008","GIC UMARDA",40,"","2016-17",2,1],["9310903242","GIC",24,"Etawah","2016-17",3,1],["9310907904","GGIC",24,"","2016-17",0,1],["9320600102","GGIC",5,"Bhagyanagar","2016-17",1,0],["9330210405","GGIC PUKHRAYAN",41,"","2016-17",1,2],["9341112602","GGIC CHUNNIGANJ",42,"Premnagar","2016-17",0,2],["9350315603","GOVT. MUMTAJ IC KADAURA",37,"","2016-17",0,1],["9351302306","GGIC ORAI",37,"Orai","2016-17",0,1],["9360307009","GIC SAKRAR",39,"","2016-17",1,0],["9360714414","GIC SAMTHAR",39,"","2016-17",2,0],["9370700109","GGIC",47,"","2016-17",0,1],["9370700110","GIC",47,"Jakhaura","2016-17",0,1],["9380108620","GIC KURARA",33,"","2016-17",0,2],["9380802001","GGIC",33,"","2016-17",1,0],["9390301606","GIC SHRINAGAR",50,"Kabarai","2016-17",2,3],["9390500939","GGIC",50,"","2016-17",0,1],["9400601707","GANDHI GIC ORAN",12,"Bisanda","2016-17",2,3],["9400900404","GIC BANDA",12,"","2016-17",1,3],["9410403909","GGIC RAJAPUR",21,"","2016-17",1,0],["9421401917","GIC",26,"","2016-17",2,0],["9431001101","GGIC KHARWAI",59,"Mandhata","2016-17",0,2],["9431709804","GIC CHANDI GOVINDPUR",59,"","2016-17",3,1],["9440309823","GGIC SIRATHU",44,"","2016-17",1,0],["9451605402","GIC BERI MANDA",60,"","2016-17",3,2],["9452200605","GGIC PHAPHAMAU",60,"","2016-17",1,0],["9460403405","GIC BAROLIJATA",13,"","2016-17",2,3],["9461621202","GGIC",13,"","2016-17",1,0],["9471501703","GIC",6,"Nagar Nigam Ayodhya","2016-17",2,3],["9471502405","GGIC",6,"Nagar Chatra","2016-17",1,0],["9480100906","SAVITRI BAI FULE GGIC",2,"Akbarpur","2016-17",1,0],["9480814201","SMT SUMITRA DEVI SHUKLA GGIC ALAPUR",2,"Ramnagar","2016-17",1,0],["9492300510","KESH KUMARI GGIC",72,"","2016-17",0,2],["9501301105","GGIC",9,"","2016-17",0,1],["9523000112","GGIC UTRAULA",11,"Utraula","2016-17",1,0],["9530511501","GGIC MASKANWA",31,"Chapiya","2016-17",1,0],["9540804105","GGIC DUMARIYAGANJ",69,"","2016-17",0,1],["9551404605","GIC",15,"Basti","2016-17",1,0],["9561500506","GGIC KHALILABAD",65,"","2016-17",1,0],["9571004607","GGIC PHARENDA",49,"","2016-17",1,0],["9580213902","GOVT. JUBALI IC BAXIPUR",32,"","2016-17",2,0],["9601502902","GIC",22,"","2016-17",1,3],["9611400505","MAHANT RAMASHRAYA DAS GIC",7,"Haraiya","2016-17",1,0],["9631802003","GGIC",10,"Hanumanganj","2016-17",2,0],["9642200728","GGIC MARIYAHUN",38,"","2016-17",2,3],["9651701206","GGIC MAHUABAGH",30,"Ghazipur","2016-17",1,0],["9651705908","GOVT. CITY IC",30,"Ghazipur","2016-17",1,0],["9660211804","ADITYA NARAYAN GIC CHAKIYA",20,"Sahkarinagar","2016-17",1,3],["9671001402","GOVT. RADHA KISHORI GIRLS IC RAM NAGAR",74,"Ramnagar","2016-17",1,0],["9681300307","GGIC",64,"Sanjanpur","2016-17",1,0],["9690913502","GGIC CHUNAR",55,"Narayanpur","2016-17",0,1],["9691304906","GIC",55,"","2016-17",0,1],["9700208504","GGIC DUDHI",71,"","2016-17",0,1],["9700807412","GIC ANPARA",71,"Myorpur","2016-17",0,2],["9710221518","VIBHUTI NARAYAN GIC GYANPUR",16,"","2016-17",2,3],["9721901301","GGIC",43,"","2016-17",1,2],["9730208001","GGIC",3,"","2016-17",0,1],["9732701209","GGIC TEEKARMAFI",3,"","2016-17",3,2],["9740903504","GOVT YAMUNA KHADAR INTER COLLEGE",67,"Unn","2016-17",0,2],["9010710801","GOVT. INTER COLLEGE GHUMTI",63,"","2022-23",4,5],["9011002605","RAJKIY KANYA INTER COLLEGE",63,"","2022-23",0,6],["9030310602","GOVT GIRLS INTER COLLEGE",17,"Haku","2022-23",6,0],["9031602431","GOVT INTER COLLEGE",17,"Najibabad","2022-23",5,7],["9040800132","GOVT.INTER COLLEGE PAKBARA",56,"","2022-23",5,7],["9050514917","GOVT INTER COLLEGE, DHAMAURA, MILAK",62,"","2022-23",4,5],["9050619004","GOVT. INTER COLLEGE MANAKPUR BANJARIYA",62,"","2022-23",7,5],["9071207718","RAJKIYA INTAR COLLEGE",54,"","2022-23",4,5],["9071300179","GOVT GIRLS INTER COLLEGE HAPUR ROAD MRT",54,"","2022-23",0,6],["9071304120","GOVT. INTER COLLEGE MEERUT",54,"","2022-23",7,5],["9100110513","GOVT GIRLS INTER COLLEGE HOSHYARPUR",28,"Sec F","2022-23",6,0],["9112900123","GOVERMENT INTER COLLEGE",19,"Bulandshahr","2022-23",7,5],["9121108003","GAYATRI DEEVI RAJKEY INTER COLLEGE GORAI",1,"Gonda","2022-23",5,4],["9121403616","RAJKEYA KANYA INTER COLLEGE ATRAULI",1,"Atrauli","2022-23",6,0],["9151003604","RAJKIYA BALIKA INTER COLL.A.KH",0,"Khandoli","2022-23",0,6],["9191603004","PT. DEENDAYAL UPADHAY GOVT. MODEL INTER COLLEGE NOORPUR",18,"","2022-23",4,5],["9191802012","GOVT. INTER COLLEGE, NADHA BHOOR",18,"Daharwa","2022-23",5,4],["9192100333","GOVT. INTER COLLEGE",18,"","2022-23",0,8],["9201300412","GOVT. GIRLS INTER COLLEGE",14,"","2022-23",0,6],["9201904905","GOVT. GIRLS INTER COLLEGE BAREILLY",14,"Bareilly","2022-23",6,0],["9210600205","GOVERNMENT GIRLS INTER COLLEGE NEORIA HUSSAINPUR MARORI",58,"Marori","2022-23",0,6],["9210708942","GOVERNMENT GIRLS INTER COLLEGE PURANPUR",58,"","2022-23",6,0],["9221101223","GOVT. INTER COLLEGE",66,"","2022-23",7,5],["9221501009","GOV. INTER COLLEGE SHAHJAHANPUR",66,"","2022-23",0,8],["9230300102","GOVT. INTER COLEGE.DHAURAHARA",46,"Dhohura","2022-23",4,5],["9230300103","GOVT.GIRLS INTER COLLEGE DHAURAHARA",46,"","2022-23",6,0],["9231008402","GOVT.I.C. SHARDA NAGAR",46,"","2022-23",5,4],["9241010002","GGIC MAHMOODABAD",70,"","2022-23",0,6],["9242000315","RAJKIYA BALIKA INTER COLLEGE BISWAN",70,"","2022-23",6,0],["9252400707","GOVT. GLS INT COLLEGE",35,"Sandila","2022-23",0,6],["9260503002","GOVT. INTER COLLEGE INAYATPUR BARRA",73,"","2022-23",0,8],["9261702950","GOVT INTER COLLEGE UNNAO",73,"","2022-23",5,7],["9270100735","Rajkiya Balika Inter College Vikas Nagar Lucknow",48,"Lucknow","2022-23",6,0],["9270916501","RAJKIYA INTER COLLAGE NISHATGANJ",48,"Nishtganj","2022-23",5,7],["9280605708","GOVT. INTER COLLEGE",61,"","2022-23",0,8],["9282208604","GOVT. GIRLS INTER COLLEGE",61,"","2022-23",6,0],["9290209907","Pt Deendayal Upadhyay Govt Model Inter College Roshanabad",25,"","2022-23",7,5],["9300701016","PT DEEN DAYAL UPADHYAY GOVT MODEL INTER COLLEGE FATEHPUR JASODA KANNAUJ",40,"","2022-23",4,5],["9340907956","GOVERNMENT GIRLS HIGHER SECONDARY SCHOOL",42,"","2022-23",0,6],["9361001009","RAJKIYA KANYA INTER COLLEGE MAURANIPUR NAGAR",39,"Mauranipur","2022-23",6,0],["9361104514","SURAJ PRASAD INTER COLL_RAJKIYE BALIKA .-7",39,"Jhansi","2022-23",0,6],["9370300110","GOVT. INTER COLLEGE JAKHAURA",47,"Jakhaura","2022-23",4,5],["9370400110","GOVT. GIRLS INTER COLLEGE",47,"","2022-23",0,6],["9380400416","GIC MUSKARA",33,"Muskara","2022-23",4,7],["9380900704","GGIC MAUDAHA",33,"Maudha","2022-23",0,6],["9390108523","GIRLS INTER COLLEGE CHARKHARI.",50,"","2022-23",0,6],["9390108524","G.IC. CHARKHARI",50,"","2022-23",5,4],["9390500965","GOVT.INTER COLLEGE",50,"","2022-23",7,5],["9400210110","G.G.I.C.TINDWARI",12,"Tindwari","2022-23",6,0],["9410500113","PT DEEN DAYAL UPADHYAY GOVT MODEL I C UNCHADEEH CHITRAKOOT",21,"Manikpur","2022-23",5,7],["9410600186","G.G.I.C. KARWI",21,"Karwi","2022-23",6,0],["9420700923","Pt Deendayal Upadhyay Govt Model Inter College Bahua",26,"Bahua","2022-23",5,7],["9420801105","Pt Deendayal Upadhyay Govt Model Inter College Daniyalpur",26,"Haswa","2022-23",7,5],["9430401003","G I C PRATAPGARH",59,"","2022-23",7,5],["9430402706","GGIC",59,"","2022-23",6,0],["9450609903","GOVERNMENT GIRLS INTER COLLEGE PHOOLPUR",60,"","2022-23",0,6],["9460106303","GOVT. GIRLS INTER COLLEGE FATEHPUR",13,"","2022-23",0,6],["9461402403","RAJKIYA INTER COLLEGE NINDURA",13,"Nindura","2022-23",5,7],["9471300102","TULSI G.G.I.C. AYODHYA",6,"Parasurampur","2022-23",6,0],["9492300512","GIC SULTANPUR",72,"","2022-23",7,5],["9501204707","GOVT INTER COLLEGE LAKHAIYA KALAN",9,"Balha","2022-23",5,4],["9510209816","RAJKIYA BALIKA INTER COLLEGE BHINGA",68,"Hariharpur Rani","2022-23",0,6],["9531101002","G.G.I.C. GONDA`",31,"","2022-23",6,0],["9570106702","GOV GIRLS IC MAHARAJGANJ",49,"Maharajganj","2022-23",6,0],["9571500303","GOVT IC NAUTANWA",49,"Nautanwa","2022-23",0,6],["9580203302","A.D. GOVT. GIRLS I. C. PURDILPUR BANK ROAD",32,"","2022-23",6,0],["9580702902","SMT CHAMPA DEVI RAJKIY I C HARNHIE",32,"","2022-23",0,6],["9580800805","RAJKIY K. I. C. SARRAYA SARDARNAGAR",32,"Sardarnagar","2022-23",6,0],["9601502903","KASTUEBA RAJKIY GIRLS INTER COLLEGE DEORIA",22,"","2022-23",6,0],["9611201913","GOVT GIRLS INTER COLLEGE",7,"Atraulia","2022-23",6,0],["9612301305","GOVT B.I.COLLEGE RAIDOPUR",7,"","2022-23",6,0],["9651113301","GOVT. GIRLS I.C. ZAMANIA",30,"Zamania","2022-23",0,6],["9660700806","G.G.I.C SAIYADRAJA",20,"","2022-23",6,0],["9660907306","GOVT. INTER COLLEGE NAUGARH",20,"","2022-23",5,4],["9670900605","GOVT. QUEENCE INTER COLLEGE LAHURABEER",74,"","2022-23",5,7],["9671000103","PRABHU NARAYAN GOVT. I.C. RAMNAGAR",74,"","2022-23",7,5],["9680409002","GOVT.HIGHER SECONDARY SCHOOL LEHRAWAN",64,"","2022-23",7,5],["9700106103","G. I. C. KON",71,"","2022-23",4,5],["9700112318","G.G.I.C. OBRA",71,"","2022-23",0,6],["9700208505","G.I.C. DUDHI",71,"","2022-23",0,8],["9700300714","GOVT.GIRL INTER COLLEGE ROBERTSGANJ",71,"","2022-23",6,0],["9700400308","G I C GHORAWAL",71,"","2022-23",8,0],["9700700704","G.I.C. CHAPKI",71,"","2022-23",0,8],["9700807108","GOVT. INTER COLLEGE PIPRI",71,"","2022-23",7,5],["9700807506","G I C SHAKTINAGAR",71,"","2022-23",5,7],["9710428804","P.D.D.U. GOVT. GIRLS INTER COLLEGE MAHARAJGANJ",16,"Orai","2022-23",6,0],["9731703504","RAJKIYA INTER COLLEGE RAJA FATEHPUR",3,"","2022-23",5,7],["9732704801","GGIC SONARI KALA",3,"Bhadar","2022-23",6,0],["9750702309","GOVERENMENT INTER COLLEGE SIKHERA HAPUR",34,"Sibhawali","2022-23",8,0]],"JR":[["Retail","Store Operations Assistant"],["IT-ITeS","Domestic Data Entry Operator"],["Security","Unarmed Security Guard"],["Automotive","Automotive Service Technician"],["Agriculture","Solanaceous Crop Cultivator"],["Sports, Physical Education, Fitness & Leisure","Early Years Physical Activity Facilitator"],["Beauty & Wellness","Assistant Beauty Therapist"],["Transportation, Logistics & Warehouse","Consignment Tracking Executive"],["Plumbing","Plumber (General)"]],"SEC":["Agriculture","Automotive","Beauty & Wellness","IT-ITeS","Plumbing","Retail","Security","Sports, Physical Education, Fitness & Leisure","Transportation, Logistics & Warehouse"],"SECH":["कृषि","ऑटोमोटिव","ब्यूटी एवं वेलनेस","आईटी-आईटीईएस (IT-ITeS)","प्लंबिंग","रिटेल (खुदरा व्यापार)","सुरक्षा","खेल, शारीरिक शिक्षा, फ़िटनेस एवं अवकाश","परिवहन, लॉजिस्टिक्स एवं वेयरहाउस"],"DOLD":{"AMETHI - CSM NAGAR":"Amethi","BHADOI":"Bhadohi","HAMIRPUR (U.P.)":"Hamirpur","HAPUR (PANCHSHEEL NAGAR)":"Hapur","JYOTIBA PHULE NAGAR (AMROHA)":"Amroha","KANSHIRAM NAGAR (KASGANJ)":"Kasganj","KHERI":"Lakhimpur Kheri","SAMBHAL (BHIM NAGAR)":"Sambhal","SHAMLI (PRABUDH NAGAR)":"Shamli","SHRAWASTI":"Shravasti","SIDDHARTHNAGAR":"Siddharthnagar","AGRA":"Agra","ALIGARH":"Aligarh","AMBEDKAR NAGAR":"Ambedkar Nagar","AMETHI":"Amethi","AMROHA":"Amroha","AURAIYA":"Auraiya","AYODHYA":"Ayodhya","AZAMGARH":"Azamgarh","BAGHPAT":"Baghpat","BAHRAICH":"Bahraich","BALLIA":"Ballia","BALRAMPUR":"Balrampur","BANDA":"Banda","BARABANKI":"Barabanki","BAREILLY":"Bareilly","BASTI":"Basti","BHADOHI":"Bhadohi","BIJNOR":"Bijnor","BUDAUN":"Budaun","BULANDSHAHR":"Bulandshahr","CHANDAULI":"Chandauli","CHITRAKOOT":"Chitrakoot","DEORIA":"Deoria","ETAH":"Etah","ETAWAH":"Etawah","FARRUKHABAD":"Farrukhabad","FATEHPUR":"Fatehpur","FIROZABAD":"Firozabad","GAUTAM BUDDHA NAGAR":"Gautam Buddha Nagar","GHAZIABAD":"Ghaziabad","GHAZIPUR":"Ghazipur","GONDA":"Gonda","GORAKHPUR":"Gorakhpur","HAMIRPUR":"Hamirpur","HAPUR":"Hapur","HARDOI":"Hardoi","HATHRAS":"Hathras","JALAUN":"Jalaun","JAUNPUR":"Jaunpur","JHANSI":"Jhansi","KANNAUJ":"Kannauj","KANPUR DEHAT":"Kanpur Dehat","KANPUR NAGAR":"Kanpur Nagar","KASGANJ":"Kasganj","KAUSHAMBI":"Kaushambi","KUSHINAGAR":"Kushinagar","LAKHIMPUR KHERI":"Lakhimpur Kheri","LALITPUR":"Lalitpur","LUCKNOW":"Lucknow","MAHARAJGANJ":"Maharajganj","MAHOBA":"Mahoba","MAINPURI":"Mainpuri","MATHURA":"Mathura","MAU":"Mau","MEERUT":"Meerut","MIRZAPUR":"Mirzapur","MORADABAD":"Moradabad","MUZAFFARNAGAR":"Muzaffarnagar","PILIBHIT":"Pilibhit","PRATAPGARH":"Pratapgarh","PRAYAGRAJ":"Prayagraj","RAE BARELI":"Rae Bareli","RAMPUR":"Rampur","SAHARANPUR":"Saharanpur","SAMBHAL":"Sambhal","SANT KABIR NAGAR":"Sant Kabir Nagar","SHAHJAHANPUR":"Shahjahanpur","SHAMLI":"Shamli","SHRAVASTI":"Shravasti","SITAPUR":"Sitapur","SONBHADRA":"Sonbhadra","SULTANPUR":"Sultanpur","UNNAO":"Unnao","VARANASI":"Varanasi"},"SOLD":{"Agriculture":"Agriculture","Apparel, Made-Ups & Home Furnishing":"Apparel, Made-Ups & Home Furnishing","Automotive":"Automotive","BFSI (Banking, Financial Services & Insurance)":"Banking, Financial Services & Insurance (BFSI)","Beauty & Wellness":"Beauty & Wellness","Construction":"Construction","Electronics & Hardware":"Electronics & Hardware","Food Processing":"Food Processing","IT-ITeS":"IT-ITeS","Logistics":"Transportation, Logistics & Warehouse","Management & Entrepreneurship and Professional Skills":"Management, Entrepreneurship & Professional Skills","Plumbing":"Plumbing","Power":"Power","Retail":"Retail","Security":"Security","Sports, Physical Education, Fitness & Leisure":"Sports, Physical Education, Fitness & Leisure","Tourism & Hospitality":"Tourism & Hospitality"}};
+var DIST = PRE.D, DIST_HI = PRE.DH, SCH = PRE.S, SECTORS = PRE.SEC, SEC_HI = PRE.SECH, JR = PRE.JR;
+// School row: [udise, name, districtIdx, block, approvalYear, jobRole1Idx, jobRole2Idx, (search key)]  ·  JR[i] = [sector, jobRole]
+function rolesOf(sec){ var o=[]; JR.forEach(function(p){ if (p[0]===sec && o.indexOf(p[1])<0) o.push(p[1]); }); return o; }
+// Stored value is always the standard English name; the label follows the selected language.
+function dLabel(x){ var i = DIST.indexOf(x); return S.lang==='hi' && i>=0 ? DIST_HI[i] : x; }
+function sLabel(x){ var i = SECTORS.indexOf(x); return S.lang==='hi' && i>=0 ? SEC_HI[i] : x; }
+function byLabel(arr, fn){ return arr.slice().sort(function(a,b){ return fn(a).localeCompare(fn(b), S.lang==='hi' ? 'hi' : 'en'); }); }
+var BY_UDISE = {};
+for (var i = 0; i < SCH.length; i++) { SCH[i][7] = SCH[i][1].toLowerCase(); BY_UDISE[SCH[i][0]] = SCH[i]; }
+
+/* ================= TEXT (EN / HI) ================= */
+var T = {
+en:{pdf:'Download PDF',pdfMaking:'Making PDF…',pdfDone:'PDF saved in Downloads',pdfFail:'Could not make the PDF on this phone',apptitle:'OJT & Exposure Visit for VE – Pre-information',brand:'OJT & Exposure Visit for VE – Pre-information',state:'Uttar Pradesh',genT:'General instructions',timeline:'Timeline',instrNext:'Next – go to forms',seeInfo:'Instructions & letters',noGen:'Department instructions will appear here.',online:'Online',offline:'Offline',pending:'{n} not sent',saved:'Saved on phone {t}',
+hello:'Namaste',h_mob:'10 digits, must start with 6, 7, 8 or 9 (e.g. 9876543210). +91 or 0 at the start is removed automatically.',h_alt:'Optional. 10 digits starting with 6–9; must be different from the mobile number above.',h_land:'Optional. STD code + number, starting with 0 (e.g. 0522-2345678).',h_pin:'6-digit PIN code of the place (e.g. 226001).',h_email:'Optional. e.g. name@gmail.com',q_alt:'Additional mobile number',q_land:'Landline number',e_land:'Enter landline with STD code, starting with 0 (10–12 digits)',e_altSame:'Additional mobile must be different from the mobile number',contact:'Contact numbers',jrFix:'The job role name is not correct – correct it',q_jrCorrect:'Correct job role name',h_jrCorrect:'Type the correct job role name. The sector stays the same.',e_clsZero:'Class enrolment cannot be 0 for a class the VT teaches',secClass:'Total class enrolment (whole school)',secVE:'VE enrolment – {r}',h_secClass:'All students of the class in the school, not only VE students.',h_secVE:'Students of this job role only.',prefillCls:'Filled from the other job role form of this school – check and correct if needed.',home_new:'Start new form',tile_draft:'Incomplete (drafts)',tile_pend:'On phone – not sent',tile_sent:'Sent to server',
+sendAll:'Send all now ({n})',settings:'Settings',yourName:'Your name (surveyor)',yourPhone:'Your mobile number',
+welcome:'Welcome! Enter your details once. They are saved on this phone and added to every entry.',save:'Save',
+viewMode:'How to show questions',oneByOne:'One by one',fullPage:'Full form on one page',
+s1:'School & job role',s2:'Vocational Trainer (VT) details',s3:'VTP (Vocational Training Provider)',q_year:'VE approval year',q_jrSlot:'Job role (trade) for this form',h_jrSlot:'Each school has 2 job roles. Fill a separate form for each job role (each VT).',q_jobRole:'Job role',e_notList:'This UDISE is not in the list of 289 OJT schools',dupWarn:'A form for this school and job role is already saved on this phone. Fill again only for a different VT.',pickSchoolFirst:'Select the school first',s4:'Classes & student enrolment',s5:'Nearest places for OJT / Exposure Visit',s6:'Review & submit',
+q_udise:'UDISE code',h_udise:'Type the full 10-digit UDISE, or 2–3 digits to see the list (only the 289 OJT schools)',
+q_school:'School name',h_school:'Type 2–3 letters to see a list',filterD:'Narrow the list by district (optional)',allD:'All districts',
+q_district:'District',q_block:'Block',autoNote:'Filled from the preload list. If anything is wrong, correct it – the change is logged.',
+blockMissing:'Block is not in the preload list – please type it.',notFound:'This UDISE is not in the list of 289 OJT schools. Please check the number.',
+edited:'Edited',noMatch:'No matching school',showing:'Showing {a} of {b} – type more to narrow',
+q_vtName:'VT name',q_vtPhone:'VT mobile number',q_vtGender:'VT gender',male:'Male',female:'Female',other:'Other',sel:'– Select –',
+q_sector:'VE sector',q_vtp:'VTP name (Vocational Training Provider)',h_vtp:'Tap to see the full VTP list, or type to search. If the VTP is not in the list, type its full name.',vtpNew:'New VTP – not in list (it will be added)',vtpCount:'{n} VTPs in list',vtpEmpty:'No VTP list yet – type the full VTP name.',
+q_classes:'Classes where the VT teaches (9th–12th)',h_classes:'Tick all that apply',cls:'Class {n}',boys:'Boys',girls:'Girls',total:'Total',
+enrClass:'Total enrolment in this class (whole school)',enrVE:'Enrolment in this VE trade',e_veMore:'VE enrolment cannot be more than class enrolment',e_veZero:'VE enrolment cannot be 0 when the class has students',allCls:'All classes',classTot:'Class enrolment',veTot:'VE enrolment',
+q_nPlaces:'Number of places where OJT / Exposure Visit is done',h_nPlaces:'Minimum 4 places',place:'Place {n}',
+q_addr:'Full address (village/mohalla, post, block, district)',q_pin:'PIN code',e_pin:'Enter a valid 6-digit PIN code',q_pphone:'Mobile number',q_email:'Email ID (optional)',q_owner:'Owner name',
+next:'Next',back:'Back',stepOf:'Step {a} of {b}',submit:'Final submit',edit:'Edit',
+req:'This is required',e_phone:'Mobile must be 10 digits starting with 6, 7, 8 or 9',e_email:'Enter a valid email ID',e_num:'Enter a number (0 or more)',
+e_cls:'Select at least one class',e_udise:'UDISE must be 10 digits',fix:'Please correct the fields marked in red',
+doneT:'Submitted',doneSent:'Entry sent to the server.',donePark:'Entry saved on this phone. It will be sent automatically when internet is available.',
+home:'Back to home',newAgain:'Start another form',cont:'Continue',correct:'Correct & resubmit',del:'Delete',confDel:'Delete this draft? This cannot be undone.',
+sending:'Sending…',sentOk:'{n} entries sent',sendFail:'Could not send right now. It will retry automatically.',noNet:'No internet. Your entries are safe on this phone.',
+empty:'Nothing here yet',backup:'Download backup file',h_backup:'Use only if entries cannot be sent for many days – share this file with your supervisor.',
+server:'Server link (admin only)',corrOf:'Correction of an earlier entry',noServer:'Server link is not set – entries will stay on this phone. Contact your admin.',
+sentAt:'Sent {t}',savedAt:'Saved {t}',draftAt:'Last edited {t}',untitled:'(School not selected yet)',changes:'Changes that will be logged:',
+nameNeeded:'Please enter your name',appv:'App version',cancel:'Cancel',retry:'Not sent – {e}',lists:'Lists updated',sendOne:'Send now',
+unsaved:'not selected',yes:'Yes',no:'No',instrT:'Instructions for filling the form',ordersT:'Department letters – reference',noOrders:'No department letter yet. New letters will appear here.',refNo:'Letter ref. no.',dated:'Dated',viewPdf:'View letter (PDF)',pdfNet:'Internet is needed to open this letter',newTag:'New',myEntries:'My entries',instr:['Each school has 2 job roles (trades). Fill a separate form for each job role – one form per VT.','Type the 10-digit UDISE code, or 2–3 digits / letters of the school name, and choose the school from the list (only the 289 OJT schools). District and block fill automatically.','If any pre-filled detail is wrong, correct it. Your name and the time are recorded with the change.','Fill the VT name, 10-digit mobile number and gender carefully.','Choose Job role 1 or 2 – the sector and job role fill automatically. Pick the VTP from the list; if it is not there, type the full VTP name.','For each class where the VT teaches, enter the total class enrolment and the VE trade enrolment (boys and girls).','Enter at least 4 places for OJT / Exposure Visit with owner name, full address with PIN code and mobile number.','The form is saved on the phone automatically – you can fill it without internet.','After Final submit the entry goes to the server by itself when internet is available. Keep checking "On phone – not sent" and tap "Send all now" when you have network.','Do not clear Chrome data or use phone-cleaner apps until all entries are sent.']},
+hi:{pdf:'PDF डाउनलोड करें',pdfMaking:'PDF बन रही है…',pdfDone:'PDF डाउनलोड फ़ोल्डर में सेव हो गई',pdfFail:'इस फ़ोन पर PDF नहीं बन सकी',apptitle:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',brand:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',state:'उत्तर प्रदेश',genT:'सामान्य निर्देश',timeline:'समय-सीमा',instrNext:'आगे बढ़ें – फ़ॉर्म पर जाएँ',seeInfo:'निर्देश एवं पत्र',noGen:'विभागीय निर्देश यहाँ दिखाई देंगे।',sub:'OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',online:'ऑनलाइन',offline:'ऑफ़लाइन',pending:'{n} भेजना बाकी',saved:'फ़ोन में सेव {t}',
+hello:'नमस्ते',h_mob:'10 अंक, 6, 7, 8 या 9 से शुरू (जैसे 9876543210)। शुरुआत में +91 या 0 अपने-आप हट जाएगा।',h_alt:'वैकल्पिक। 6–9 से शुरू 10 अंक; ऊपर वाले मोबाइल नंबर से अलग होना चाहिए।',h_land:'वैकल्पिक। STD कोड सहित नंबर, 0 से शुरू (जैसे 0522-2345678)।',h_pin:'स्थान का 6 अंकों का पिन कोड (जैसे 226001)।',h_email:'वैकल्पिक। जैसे name@gmail.com',q_alt:'अतिरिक्त मोबाइल नंबर',q_land:'लैंडलाइन नंबर',e_land:'STD कोड सहित लैंडलाइन लिखें, 0 से शुरू (10–12 अंक)',e_altSame:'अतिरिक्त मोबाइल, मोबाइल नंबर से अलग होना चाहिए',contact:'संपर्क नंबर',jrFix:'जॉब रोल का नाम सही नहीं है – सुधार करें',q_jrCorrect:'सही जॉब रोल का नाम',h_jrCorrect:'जॉब रोल का सही नाम लिखें। सेक्टर वही रहेगा।',e_clsZero:'जिस कक्षा में VT पढ़ाते हैं, उसका कुल नामांकन 0 नहीं हो सकता',secClass:'कक्षा का कुल नामांकन (पूरा विद्यालय)',secVE:'VE नामांकन – {r}',h_secClass:'विद्यालय में कक्षा के सभी छात्र, केवल VE छात्र नहीं।',h_secVE:'केवल इस जॉब रोल के छात्र।',prefillCls:'इस विद्यालय के दूसरे जॉब रोल फ़ॉर्म से भरा गया – जाँचें और ज़रूरत हो तो सुधारें।',home_new:'नया फ़ॉर्म शुरू करें',tile_draft:'अधूरे फ़ॉर्म (ड्राफ़्ट)',tile_pend:'फ़ोन में – नहीं भेजे गए',tile_sent:'सर्वर पर भेजे गए',
+sendAll:'सभी अभी भेजें ({n})',settings:'सेटिंग्स',yourName:'आपका नाम (सर्वेयर)',yourPhone:'आपका मोबाइल नंबर',
+welcome:'स्वागत है! अपना विवरण एक बार भरें। यह इस फ़ोन में सेव रहेगा और हर एंट्री के साथ जुड़ेगा।',save:'सेव करें',
+viewMode:'प्रश्न कैसे दिखें',oneByOne:'एक-एक करके',fullPage:'पूरा फ़ॉर्म एक पेज पर',
+s1:'विद्यालय एवं जॉब रोल',s2:'व्यावसायिक प्रशिक्षक (VT) का विवरण',s3:'VTP (व्यावसायिक प्रशिक्षण प्रदाता)',q_year:'VE स्वीकृति वर्ष',q_jrSlot:'इस फ़ॉर्म का जॉब रोल (ट्रेड)',h_jrSlot:'हर विद्यालय में 2 जॉब रोल हैं। हर जॉब रोल (हर VT) के लिए अलग फ़ॉर्म भरें।',q_jobRole:'जॉब रोल',e_notList:'यह UDISE 289 OJT विद्यालयों की सूची में नहीं है',dupWarn:'इस विद्यालय और जॉब रोल का फ़ॉर्म इस फ़ोन में पहले से सेव है। दोबारा केवल किसी दूसरे VT के लिए भरें।',pickSchoolFirst:'पहले विद्यालय चुनें',s4:'कक्षाएँ एवं छात्र नामांकन',s5:'OJT / एक्सपोज़र विज़िट के निकटतम स्थान',s6:'जाँचें और जमा करें',
+q_udise:'UDISE कोड',h_udise:'पूरा 10 अंकों का UDISE लिखें, या सूची देखने के लिए 2–3 अंक लिखें (केवल 289 OJT विद्यालय)',
+q_school:'विद्यालय का नाम',h_school:'सूची देखने के लिए 2–3 अक्षर लिखें',filterD:'सूची को ज़िले से छोटा करें (वैकल्पिक)',allD:'सभी ज़िले',
+q_district:'ज़िला',q_block:'ब्लॉक',autoNote:'प्रीलोड सूची से भरा गया है। कुछ गलत हो तो सुधारें – बदलाव रिकॉर्ड होगा।',
+blockMissing:'प्रीलोड सूची में ब्लॉक नहीं है – कृपया लिखें।',notFound:'यह UDISE 289 OJT विद्यालयों की सूची में नहीं है। कृपया नंबर जाँचें।',
+edited:'संशोधित',noMatch:'कोई विद्यालय नहीं मिला',showing:'{b} में से {a} दिख रहे हैं – छोटा करने के लिए और लिखें',
+q_vtName:'VT का नाम',q_vtPhone:'VT का मोबाइल नंबर',q_vtGender:'VT का लिंग',male:'पुरुष',female:'महिला',other:'अन्य',sel:'– चुनें –',
+q_sector:'VE सेक्टर',q_vtp:'VTP का नाम (व्यावसायिक प्रशिक्षण प्रदाता)',h_vtp:'पूरी VTP सूची देखने के लिए टैप करें या खोजने के लिए लिखें। यदि VTP सूची में नहीं है, तो उसका पूरा नाम लिखें।',vtpNew:'नया VTP – सूची में नहीं (जोड़ दिया जाएगा)',vtpCount:'सूची में {n} VTP',vtpEmpty:'अभी VTP सूची नहीं है – VTP का पूरा नाम लिखें।',
+q_classes:'कक्षाएँ जहाँ VT पढ़ाते हैं (9वीं–12वीं)',h_classes:'जो लागू हों, सभी पर टिक करें',cls:'कक्षा {n}',boys:'बालक',girls:'बालिकाएँ',total:'कुल',
+enrClass:'इस कक्षा में कुल नामांकन (पूरा विद्यालय)',enrVE:'इस VE ट्रेड में नामांकन',e_veMore:'VE नामांकन कक्षा के नामांकन से अधिक नहीं हो सकता',e_veZero:'कक्षा में छात्र होने पर VE नामांकन 0 नहीं हो सकता',allCls:'सभी कक्षाएँ',classTot:'कक्षा नामांकन',veTot:'VE नामांकन',
+q_nPlaces:'OJT / एक्सपोज़र विज़िट वाले स्थानों की संख्या',h_nPlaces:'कम से कम 4 स्थान',place:'स्थान {n}',
+q_addr:'पूरा पता (गाँव/मोहल्ला, पोस्ट, ब्लॉक, ज़िला)',q_pin:'पिन कोड',e_pin:'सही 6 अंकों का पिन कोड लिखें',q_pphone:'मोबाइल नंबर',q_email:'ईमेल आईडी (वैकल्पिक)',q_owner:'मालिक / संचालक का नाम',
+next:'आगे',back:'पीछे',stepOf:'चरण {a} / {b}',submit:'अंतिम रूप से जमा करें',edit:'बदलें',
+req:'यह भरना आवश्यक है',e_phone:'मोबाइल नंबर 6, 7, 8 या 9 से शुरू 10 अंकों का होना चाहिए',e_email:'सही ईमेल आईडी लिखें',e_num:'संख्या लिखें (0 या अधिक)',
+e_cls:'कम से कम एक कक्षा चुनें',e_udise:'UDISE 10 अंकों का होना चाहिए',fix:'कृपया लाल रंग से चिह्नित प्रश्न ठीक करें',
+doneT:'जमा हो गया',doneSent:'एंट्री सर्वर पर भेज दी गई।',donePark:'एंट्री इस फ़ोन में सेव है। इंटरनेट मिलते ही अपने-आप भेज दी जाएगी।',
+home:'होम पर जाएँ',newAgain:'एक और फ़ॉर्म शुरू करें',cont:'जारी रखें',correct:'सुधार कर फिर जमा करें',del:'हटाएँ',confDel:'यह ड्राफ़्ट हटाएँ? इसे वापस नहीं लाया जा सकेगा।',
+sending:'भेजा जा रहा है…',sentOk:'{n} एंट्री भेजी गईं',sendFail:'अभी नहीं भेज सके। अपने-आप फिर कोशिश होगी।',noNet:'इंटरनेट नहीं है। आपकी एंट्री इस फ़ोन में सुरक्षित हैं।',
+empty:'अभी यहाँ कुछ नहीं है',backup:'बैकअप फ़ाइल डाउनलोड करें',h_backup:'केवल तब उपयोग करें जब कई दिनों तक एंट्री न भेजी जा सके – यह फ़ाइल अपने सुपरवाइज़र को भेजें।',
+server:'सर्वर लिंक (केवल एडमिन)',corrOf:'पिछली एंट्री का सुधार',noServer:'सर्वर लिंक सेट नहीं है – एंट्री इसी फ़ोन में रहेंगी। एडमिन से संपर्क करें।',
+sentAt:'भेजा गया {t}',savedAt:'सेव {t}',draftAt:'अंतिम बदलाव {t}',untitled:'(विद्यालय अभी नहीं चुना)',changes:'ये बदलाव रिकॉर्ड होंगे:',
+nameNeeded:'कृपया अपना नाम लिखें',appv:'ऐप संस्करण',cancel:'रद्द करें',retry:'नहीं भेजा गया – {e}',lists:'सूचियाँ अपडेट हुईं',sendOne:'अभी भेजें',
+unsaved:'नहीं चुना',yes:'हाँ',no:'नहीं',instrT:'फ़ॉर्म भरने के निर्देश',ordersT:'विभागीय पत्र – संदर्भ',noOrders:'अभी कोई विभागीय पत्र नहीं है। नए पत्र यहाँ दिखाई देंगे।',refNo:'पत्रांक',dated:'दिनांक',viewPdf:'पत्र देखें (PDF)',pdfNet:'यह पत्र खोलने के लिए इंटरनेट आवश्यक है',newTag:'नया',myEntries:'मेरी एंट्री',instr:['हर विद्यालय में 2 जॉब रोल (ट्रेड) हैं। हर जॉब रोल के लिए अलग फ़ॉर्म भरें – हर VT का एक फ़ॉर्म।','10 अंकों का UDISE कोड, या विद्यालय के नाम के 2–3 अंक/अक्षर लिखें और सूची से विद्यालय चुनें (केवल 289 OJT विद्यालय)। ज़िला और ब्लॉक अपने-आप भर जाएँगे।','यदि पहले से भरी कोई जानकारी गलत है तो उसे सुधारें। बदलाव के साथ आपका नाम और समय दर्ज होगा।','VT का नाम, 10 अंकों का मोबाइल नंबर और लिंग ध्यान से भरें।','जॉब रोल 1 या 2 चुनें – सेक्टर और जॉब रोल अपने-आप भर जाएँगे। VTP सूची से चुनें; यदि सूची में न हो तो VTP का पूरा नाम लिखें।','जिन कक्षाओं में VT पढ़ाते हैं, हर कक्षा का कुल नामांकन और VE ट्रेड का नामांकन (बालक व बालिका) भरें।','OJT / एक्सपोज़र विज़िट के कम से कम 4 स्थान भरें – मालिक का नाम, पिन कोड सहित पूरा पता और मोबाइल नंबर।','फ़ॉर्म फ़ोन में अपने-आप सेव होता रहता है – बिना इंटरनेट के भी भर सकते हैं।','अंतिम रूप से जमा करने के बाद, इंटरनेट मिलते ही एंट्री अपने-आप सर्वर पर चली जाती है। "फ़ोन में – नहीं भेजे गए" देखते रहें और नेटवर्क मिलने पर "सभी अभी भेजें" दबाएँ।','जब तक सभी एंट्री न भेज दी जाएँ, Chrome का डेटा साफ़ न करें और फ़ोन-क्लीनर ऐप का उपयोग न करें।']}
+};
+
+/* ================= STATE / STORAGE ================= */
+function ls(k, v){ try{ if (v === undefined){ var x = localStorage.getItem(k); return x ? JSON.parse(x) : null; } localStorage.setItem(k, JSON.stringify(v)); }catch(e){ return null; } }
+var S = {
+  lang: ls('sl_lang') || 'hi',
+  mode: ls('sl_mode') || 'step',
+  user: ls('sl_user') || {name:'', phone:''},
+  url: ls('sl_url') || SCRIPT_URL,
+  vtp: ls('sl_vtp') || VTP_DEFAULT, vtpLocal: ls('sl_vtp_local') || [], orders: ls('sl_orders') || DEPT_ORDERS_DEFAULT, general: ls('sl_general') || null, instr: ls('sl_instr') || null,
+  recs: ls('sl_recs') || [],
+  cur: null, step: 0, showErr: false, errs: {}, view: 'info', tab: 'draft', syncing: false, lastSaved: null, filterD: ''
+};
+function persist(){ ls('sl_recs', S.recs); }
+(function migrate(){ S.recs.forEach(function(r){ var d = r.data; if (!d) return;
+  if (d.vtp==='__other'){ d.vtp = d.vtpOther || ''; } delete d.vtpOther;
+  if (VTP_ALIAS[d.vtp]) d.vtp = VTP_ALIAS[d.vtp];
+  if (PRE.DOLD[d.district]) d.district = PRE.DOLD[d.district];
+  if (PRE.SOLD[d.sector]) d.sector = PRE.SOLD[d.sector];
+  if (d.jobRoleList===undefined && d.jobRole){ d.jobRoleList = d.jobRole; d.jrFix = false; }
+  if (d.jobSlot===undefined){ d.jobSlot=''; d.jobRole=''; if (!d.jobRole && r.status==='draft') d.sector=''; }
+  if (r.preload && PRE.DOLD[r.preload.district]){ r.preload.district = PRE.DOLD[r.preload.district]; var ps = BY_UDISE[r.preload.udise]; if (ps){ r.preload.block = ps[3]; if (d.block && d.block.toUpperCase()===d.block && d.block.toLowerCase()===ps[3].toLowerCase()) d.block = ps[3]; } }
+  for (var c in d.enrol){ var e = d.enrol[c]; if (e && e.b!==undefined && e.vb===undefined){ e.vb = e.b; e.vg = e.g; e.cb = ''; e.cg = ''; delete e.b; delete e.g; } }
+  if (+d.nPlaces < 4) d.nPlaces = '4'; while (d.places.length < 4) d.places.push({}); }); })();
+function t(k, o){ var s = (T[S.lang][k] || T.en[k] || k); if (typeof s !== 'string') return s; if (o) for (var p in o) s = s.replace('{'+p+'}', o[p]); return s; }
+function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function $(id){ return document.getElementById(id); }
+function nowISO(){ var d = new Date(), z = -d.getTimezoneOffset(), p = function(n){ return (n<10?'0':'')+n; };
+  return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+' '+p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds()); }
+function fmt(ts){ if(!ts) return ''; return ts.slice(8,10)+'/'+ts.slice(5,7)+' '+ts.slice(11,16); }
+function uid(){ return 'SL-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).slice(2,6).toUpperCase(); }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+function blankData(){ return {udise:'',school:'',district:'',block:'',vtName:'',vtPhone:'',vtGender:'',jobSlot:'',sector:'',jobRole:'',vtp:'',classes:[],enrol:{},nPlaces:'4',places:[{},{},{},{}]}; }
+function findRec(id){ for (var i=0;i<S.recs.length;i++) if (S.recs[i].id===id) return S.recs[i]; return null; }
+function count(st){ var n=0; S.recs.forEach(function(r){ if(r.status===st) n++; }); return n; }
+
+/* ================= HEADER / STATUS ================= */
+function renderHeader(){
+  var ttl = t('apptitle').split(' – '); $('brandT').innerHTML = esc(ttl[0]) + (ttl[1] ? ' <span style="white-space:nowrap">– '+esc(ttl[1])+'</span>' : ''); document.title = t('apptitle');
+  $('lenBtn').className = S.lang==='en' ? 'on' : ''; $('lhiBtn').className = S.lang==='hi' ? 'on' : '';
+  document.documentElement.lang = S.lang;
+  var on = navigator.onLine, p = count('pending');
+  var h = '<span class="chip '+(on?'on':'off')+'"><span class="dot"></span>'+t(on?'online':'offline')+'</span>';
+  if (p) h += '<span class="chip pend">'+(S.syncing ? t('sending') : t('pending',{n:p}))+'</span>';
+  if (S.view==='form' && S.lastSaved) h += '<span class="chip saved">✓ '+t('saved',{t:S.lastSaved.slice(11,16)})+'</span>';
+  $('statusBar').innerHTML = h;
+}
+function toast(msg){ var d=document.createElement('div'); d.className='toast'; d.textContent=msg; document.body.appendChild(d); setTimeout(function(){ d.parentNode && d.parentNode.removeChild(d); }, 3200); }
+
+/* ================= VIEWS ================= */
+function go(v){ S.view = v; render(); window.scrollTo(0,0); }
+function render(){
+  renderHeader();
+  $('navbar').className = 'navbar hide';
+  if (S.view==='info') return viewInfo();
+  if (S.view==='home') return viewHome();
+  if (S.view==='list') return viewList();
+  if (S.view==='settings') return viewSettings(false);
+  if (S.view==='form') return viewForm();
+  if (S.view==='done') return viewDone();
+}
+
+function viewHome(){
+  var p = count('pending');
+  var h = '<h2 class="hello">'+t('hello')+'</h2><hr class="rule">';
+  if (!S.url) h += '<div class="note bad">'+t('noServer')+'</div>';
+  h += '<button class="btn pri" style="margin-top:14px" onclick="newForm()">＋ '+t('home_new')+'</button>';
+  h += '<div class="tiles">'+
+    '<button class="tile" onclick="openList(\'draft\')"><div class="n">'+count('draft')+'</div><div class="l">'+t('tile_draft')+'</div></button>'+
+    '<button class="tile p" onclick="openList(\'pending\')"><div class="n">'+p+'</div><div class="l">'+t('tile_pend')+'</div></button>'+
+    '<button class="tile s" onclick="openList(\'sent\')" style="grid-column:1/-1"><div class="n">'+count('sent')+'</div><div class="l">'+t('tile_sent')+'</div></button></div>';
+  if (p) h += '<button class="btn gold" onclick="syncAll(true)">⇪ '+t('sendAll',{n:p})+'</button>';
+
+  h += '<button class="btn out" style="margin-top:12px" onclick="go(\'info\')">ⓘ '+t('seeInfo')+'</button>';
+  h += '<footer>'+t('state')+' · v'+APP_VERSION+'</footer>';
+  $('view').innerHTML = h;
+}
+
+/* Opening screen: 1) General instructions + timeline  2) Form instructions  3) Letter references  → Next */
+function viewInfo(){
+  var h = '';
+  if (!S.url) h += '<div class="note bad" style="margin-top:12px">'+t('noServer')+'</div>';
+  // 1. General instructions & timeline
+  var gen = (S.general && S.general[S.lang] && S.general[S.lang].length) ? S.general[S.lang] : GENERAL_DEFAULT[S.lang];
+  h += secT(1, t('genT')) + '<div class="card"><ol class="instr">'+gen.map(function(x){
+    return '<li>'+esc(x.text)+(x.date ? '<div><span class="tl">⏱ '+t('timeline')+': '+esc(x.date)+'</span></div>' : '')+'</li>'; }).join('')+'</ol></div>';
+  // 2. Form instructions
+  var ins = (S.instr && S.instr[S.lang] && S.instr[S.lang].length) ? S.instr[S.lang] : t('instr');
+  h += secT(2, t('instrT')) + '<div class="card"><ol class="instr">'+ins.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ol></div>';
+  // 3. Letter references
+  var ords = (S.orders || []).filter(function(o){ return o && (o.ref || o.subject_hi || o.subject_en); });
+  h += secT(3, t('ordersT'));
+  if (!ords.length) h += '<div class="card" style="color:var(--muted)">'+t('noOrders')+'</div>';
+  ords.forEach(function(o, i){
+    var sub = S.lang==='hi' ? (o.subject_hi || o.subject_en) : (o.subject_en || o.subject_hi);
+    var det = S.lang==='hi' ? (o.details_hi || o.details_en) : (o.details_en || o.details_hi);
+    h += '<div class="card order">'+(i===0 ? '<span class="badge red" style="margin:0 0 6px">'+t('newTag')+'</span>' : '')+
+      '<div class="meta">'+(o.ref ? t('refNo')+': <b>'+esc(o.ref)+'</b>' : '')+(o.date ? (o.ref?' · ':'')+t('dated')+': <b>'+esc(o.date)+'</b>' : '')+'</div>'+
+      (sub ? '<h3 style="font-size:16.5px;margin:6px 0 4px">'+esc(sub)+'</h3>' : '')+
+      (det ? '<p style="margin:6px 0;white-space:pre-line">'+esc(det)+'</p>' : '')+
+      (o.pdf ? '<button class="btn out" style="min-height:42px;font-size:15px;margin-top:6px" onclick="openPdf('+i+')">📄 '+t('viewPdf')+'</button>' : '')+'</div>';
+  });
+  h += '<footer>'+t('state')+' · v'+APP_VERSION+'</footer>';
+  $('view').innerHTML = h;
+  $('navIn').innerHTML = '<button class="btn pri" onclick="go(\'home\')">'+t('instrNext')+' ›</button>';
+  $('navbar').className = 'navbar';
+  precachePdfs();
+}
+function secT(n, title){ return '<h2 class="sec-title" style="margin-top:18px"><span class="num">'+n+'</span>'+title+'</h2><hr class="rule">'; }
+function openPdf(i){
+  var o = S.orders[i]; if (!o || !o.pdf) return;
+  var local = !/^https?:/i.test(o.pdf);
+  if (!local && !navigator.onLine){ toast(t('pdfNet')); return; }
+  window.open(o.pdf, '_blank');
+}
+function precachePdfs(){ // letters uploaded next to index.html are cached so they open offline too
+  if (!navigator.onLine || !window.caches) return;
+  (S.orders||[]).forEach(function(o){ if (o && o.pdf && !/^https?:/i.test(o.pdf)) fetch(o.pdf).catch(function(){}); });
+}
+
+function openList(tab){ S.tab = tab; go('list'); }
+function viewList(){
+  var tabs = ['draft','pending','sent'], names = {draft:'tile_draft',pending:'tile_pend',sent:'tile_sent'};
+  var h = '<div class="tabs">'+tabs.map(function(k){ return '<button class="'+(S.tab===k?'on':'')+'" onclick="openList(\''+k+'\')">'+t(names[k])+' ('+count(k)+')</button>'; }).join('')+'</div>';
+  var list = S.recs.filter(function(r){ return r.status===S.tab; }).sort(function(a,b){ return (b.updatedAt||'') > (a.updatedAt||'') ? 1 : -1; });
+  if (S.tab==='pending' && list.length) h += '<button class="btn gold" style="margin:10px 0" onclick="syncAll(true)">⇪ '+t('sendAll',{n:list.length})+'</button>';
+  if (!list.length) h += '<div class="card" style="text-align:center;color:var(--muted)">'+t('empty')+'</div>';
+  list.forEach(function(r){
+    var d = r.data;
+    h += '<div class="item"><b>'+esc(d.school || t('untitled'))+'</b>'+(r.recordType==='Correction'?'<span class="badge edit">'+t('edited')+'</span>':'')+
+      '<div class="meta">'+esc(d.udise)+(d.district?' · '+esc(d.district):'')+(d.vtName?' · VT: '+esc(d.vtName):'')+'<br>'+
+      (r.status==='sent' ? t('sentAt',{t:fmt(r.sentAt)}) : r.status==='pending' ? t('savedAt',{t:fmt(r.submittedAt)}) : t('draftAt',{t:fmt(r.updatedAt)}))+
+      (r.status==='pending' && r.lastError ? '<br><span style="color:var(--brick)">'+esc(t('retry',{e:r.lastError}))+'</span>' : '')+'</div><div class="acts">';
+    if (r.status==='draft') h += '<button class="btn pri" onclick="openRec(\''+r.id+'\')">'+t('cont')+'</button><button class="btn out" style="flex:0 0 34%" onclick="delRec(\''+r.id+'\')">'+t('del')+'</button>';
+    if (r.status==='pending') h += '<button class="btn teal" onclick="syncAll(true,\''+r.id+'\')">'+t('sendOne')+'</button><button class="btn out" onclick="reopen(\''+r.id+'\')">'+t('edit')+'</button>';
+    if (r.status==='sent') h += '<button class="btn out" onclick="correctRec(\''+r.id+'\')">✎ '+t('correct')+'</button>';
+    if (r.status!=='draft') h += '<button class="btn teal" style="flex:0 0 22%" onclick="downloadPdf(\''+r.id+'\')" aria-label="PDF">⤓ PDF</button>';
+    h += '</div></div>';
+  });
+  h += '<button class="btn ghost" onclick="go(\'home\')">← '+t('home')+'</button>';
+  $('view').innerHTML = h;
+}
+
+function viewSettings(first){
+  var u = S.user;
+  var h = '<h2 class="hello">'+(first ? t('brand') : t('settings'))+'</h2><hr class="rule">';
+  if (first) h += '<div class="note">'+t('welcome')+'</div>';
+  h += '<div class="card"><div class="q"><label class="ql">'+t('viewMode')+'</label><div class="chips">'+
+      '<label class="'+(S.mode==='step'?'on':'')+'"><input type="radio" name="md" value="step" '+(S.mode==='step'?'checked':'')+'>'+t('oneByOne')+'</label>'+
+      '<label class="'+(S.mode==='full'?'on':'')+'"><input type="radio" name="md" value="full" '+(S.mode==='full'?'checked':'')+'>'+t('fullPage')+'</label></div></div>';
+  if (!first) h += '<details style="margin-top:10px"><summary class="hint" style="margin:0">'+t('server')+'</summary><input type="text" id="uUrl" value="'+esc(S.url)+'" placeholder="https://script.google.com/macros/s/…/exec" style="margin-top:8px"></details>';
+  h += '</div><button class="btn pri" onclick="saveSettings('+(first?1:0)+')">'+t('save')+'</button>';
+  if (!first) h += '<div class="card"><button class="btn out" onclick="downloadBackup()">⤓ '+t('backup')+'</button><div class="hint" style="margin-top:8px">'+t('h_backup')+'</div></div>'+
+    '<button class="btn ghost" onclick="go(\'home\')">← '+t('home')+'</button><footer>'+t('appv')+' '+APP_VERSION+'</footer>';
+  $('view').innerHTML = h;
+  Array.prototype.forEach.call(document.querySelectorAll('input[name=md]'), function(el){ el.onchange = function(){
+    Array.prototype.forEach.call(document.querySelectorAll('input[name=md]'), function(x){ x.parentNode.className = x.checked ? 'on' : ''; }); }; });
+}
+function saveSettings(first){
+  var m = document.querySelector('input[name=md]:checked'); if (m){ S.mode = m.value; ls('sl_mode', S.mode); }
+  if ($('uUrl')){ S.url = $('uUrl').value.trim(); ls('sl_url', S.url); fetchLists(); }
+  go(first ? 'info' : 'home');
+}
+
+/* ================= FORM ================= */
+var STEPS = ['s1','s2','s3','s4','s5','s6'];
+function newForm(){
+  var r = {id:uid(), status:'draft', createdAt:nowISO(), updatedAt:nowISO(), recordType:'New', parentId:'', data:blankData(), preload:null, original:null};
+  S.recs.push(r); persist(); S.cur = r; S.step = 0; S.showErr = false; S.errs = {}; S.lastSaved = null; S.filterD=''; go('form');
+}
+function openRec(id){ S.cur = findRec(id); S.step = 0; S.showErr=false; S.errs={}; S.lastSaved=S.cur.updatedAt; S.filterD=''; go('form'); }
+function reopen(id){ var r = findRec(id); r.status='draft'; r.updatedAt=nowISO(); persist(); openRec(id); }
+function delRec(id){ if (!confirm(t('confDel'))) return; S.recs = S.recs.filter(function(r){ return r.id!==id; }); persist(); render(); }
+function correctRec(id){
+  var o = findRec(id);
+  var r = {id:uid(), status:'draft', createdAt:nowISO(), updatedAt:nowISO(), recordType:'Correction', parentId:o.id,
+    data:clone(o.data), preload:o.preload ? clone(o.preload) : null, original:clone(o.data)};
+  S.recs.push(r); persist(); S.cur = r; S.step = 0; S.showErr=false; S.errs={}; S.lastSaved=null; go('form');
+}
+
+var saveTimer = null;
+function touch(){ var r = S.cur; r.updatedAt = nowISO(); clearTimeout(saveTimer);
+  saveTimer = setTimeout(function(){ persist(); S.lastSaved = r.updatedAt; renderHeader(); }, 250); }
+function saveNow(){ clearTimeout(saveTimer); S.cur.updatedAt = nowISO(); persist(); S.lastSaved = S.cur.updatedAt; renderHeader(); }
+
+function viewForm(){
+  var r = S.cur, h = '';
+  if (r.recordType==='Correction') h += '<div class="note warn" style="margin-top:12px">✎ '+t('corrOf')+'</div>';
+  h += '<div class="modebar"><button class="'+(S.mode==='step'?'on':'')+'" onclick="setMode(\'step\')">'+t('oneByOne')+'</button><button class="'+(S.mode==='full'?'on':'')+'" onclick="setMode(\'full\')">'+t('fullPage')+'</button></div>';
+  if (S.mode==='step'){
+    h += '<div class="prog"><i style="width:'+Math.round((S.step+1)/STEPS.length*100)+'%"></i></div><div class="steptxt">'+t('stepOf',{a:S.step+1,b:STEPS.length})+'</div>';
+    h += section(S.step);
+  } else {
+    for (var i=0;i<STEPS.length;i++) h += section(i);
+  }
+  $('view').innerHTML = h;
+  var nb = '';
+  if (S.mode==='step'){
+    nb = '<div class="row">'+(S.step>0 ? '<button class="btn out" onclick="stepGo(-1)">‹ '+t('back')+'</button>' : '<button class="btn out" onclick="saveNow();go(\'home\')">⌂ '+t('home')+'</button>')+
+      (S.step<STEPS.length-1 ? '<button class="btn pri" onclick="stepGo(1)">'+t('next')+' ›</button>' : '<button class="btn gold" onclick="submitForm()">✓ '+t('submit')+'</button>')+'</div>';
+  } else {
+    nb = '<div class="row"><button class="btn out" style="flex:0 0 35%" onclick="saveNow();go(\'home\')">⌂ '+t('home')+'</button><button class="btn gold" onclick="submitForm()">✓ '+t('submit')+'</button></div>';
+  }
+  $('navIn').innerHTML = nb; $('navbar').className = 'navbar';
+  bindForm();
+}
+function setMode(m){ S.mode = m; ls('sl_mode', m); S.showErr=false; render(); }
+
+function lbl(k, req, path){ var ed = editedBadge(path); return '<label class="ql">'+t(k)+(req?' <span class="req">*</span>':'')+ed+'</label>'; }
+function err(path){ return (S.showErr && S.errs[path]) ? '<div class="errmsg">'+esc(S.errs[path])+'</div>' : ''; }
+function qcls(path){ return 'q'+((S.showErr && S.errs[path])?' bad':''); }
+function editedBadge(path){
+  var r = S.cur; if (!path) return '';
+  if (r.preload && r.preload[path] !== undefined && String(r.preload[path]) !== String(r.data[path])) return '<span class="badge edit">'+t('edited')+'</span>';
+  if (r.original && path.indexOf('.')<0 && JSON.stringify(r.original[path]) !== JSON.stringify(r.data[path])) return '<span class="badge edit">'+t('edited')+'</span>';
+  return '';
+}
+function opt(v, label, cur){ return '<option value="'+esc(v)+'"'+(String(v)===String(cur)?' selected':'')+'>'+esc(label)+'</option>'; }
+function inp(path, type, extra){ return '<input type="'+type+'" data-k="'+path+'" value="'+esc(getP(path))+'" '+(extra||'')+'>'; }
+function getP(path){ var o = S.cur.data, ps = path.split('.'); for (var i=0;i<ps.length;i++){ if (o==null) return ''; o = o[ps[i]]; } return o==null ? '' : o; }
+function setP(path, v){ var o = S.cur.data, ps = path.split('.'); for (var i=0;i<ps.length-1;i++){ if (o[ps[i]]==null) o[ps[i]] = {}; o = o[ps[i]]; } o[ps[ps.length-1]] = v; }
+
+function secHead(i){ return '<h2 class="sec-title"><span class="num">'+(i+1)+'</span>'+t(STEPS[i])+'</h2><hr class="rule">'; }
+function section(i){
+  var d = S.cur.data, r = S.cur, h = '<section>'+secHead(i)+'<div class="card">';
+  if (i===0){
+    h += '<div class="q"><label class="ql">'+t('filterD')+'</label><select id="fD">'+opt('',t('allD'),S.filterD)+byLabel(DIST,dLabel).map(function(x){ return opt(x,dLabel(x),S.filterD); }).join('')+'</select></div>';
+    h += '<div class="'+qcls('udise')+'">'+lbl('q_udise',1,'udise')+'<div class="hint">'+t('h_udise')+'</div><div class="ta">'+inp('udise','tel','inputmode="numeric" maxlength="11" autocomplete="off" id="fUdise"')+'<div class="sugg hide" id="sgU"></div></div>'+err('udise')+'</div>';
+    if (d.udise.length===10 && !BY_UDISE[d.udise]) h += '<div class="note warn">'+t('notFound')+'</div>';
+    h += '<div class="'+qcls('school')+'">'+lbl('q_school',1,'school')+'<div class="hint">'+t('h_school')+'</div><div class="ta">'+inp('school','text','autocomplete="off" id="fSchool"')+'<div class="sugg hide" id="sgS"></div></div>'+err('school')+'</div>';
+    h += '<div class="'+qcls('district')+'">'+lbl('q_district',1,'district')+'<select data-k="district">'+opt('',t('sel'),d.district)+byLabel(DIST,dLabel).map(function(x){ return opt(x,dLabel(x),d.district); }).concat(d.district && DIST.indexOf(d.district)<0 ? [opt(d.district,d.district,d.district)] : []).join('')+'</select>'+err('district')+'</div>';
+    h += '<div class="'+qcls('block')+'">'+lbl('q_block',1,'block')+(r.preload && !r.preload.block ? '<div class="hint" style="color:var(--brick)">'+t('blockMissing')+'</div>' : '')+inp('block','text','autocomplete="off"')+err('block')+'</div>';
+    var sc = BY_UDISE[d.udise];
+    h += '<div class="'+qcls('jobSlot')+'">'+lbl('q_jrSlot',1)+'<div class="hint">'+t('h_jrSlot')+'</div>';
+    if (sc){ h += '<div class="chips">';
+      [5,6].forEach(function(ix, n){ var slot = String(n+1), on = d.jobSlot===slot, p = JR[sc[ix]];
+        h += '<label class="'+(on?'on':'')+'" style="flex:1 1 100%"><input type="radio" name="jslot" data-slot="'+slot+'" '+(on?'checked':'')+'><span>'+t('q_jobRole')+' '+slot+': '+esc(p[1])+'<br><small style="font-weight:400;color:var(--muted)">'+esc(sLabel(p[0]))+'</small></span></label>'; });
+      h += '</div>';
+    } else h += '<div class="hint" style="color:var(--brick)">'+t('pickSchoolFirst')+'</div>';
+    h += err('jobSlot')+'</div>';
+    if (r.preload) h += '<div class="note">'+t('autoNote')+'</div>';
+    if (d.jobSlot){
+      h += '<div class="chips" style="margin-top:6px"><label class="'+(d.jrFix?'on':'')+'" style="flex:1 1 100%;font-weight:400"><input type="checkbox" data-jrfix="1" '+(d.jrFix?'checked':'')+'>'+t('jrFix')+'</label></div>';
+      if (d.jrFix) h += '<div class="'+qcls('jobRole')+'">'+lbl('q_jrCorrect',1,'jobRole')+'<div class="hint">'+t('h_jrCorrect')+' ('+esc(sLabel(d.sector))+')</div>'+inp('jobRole','text','autocomplete="off"')+err('jobRole')+'</div>';
+      var dup = S.recs.some(function(o){ return o!==r && o.status!=='draft' && o.data.udise===d.udise && o.data.jobSlot===d.jobSlot && o.id!==r.parentId; });
+      if (dup) h += '<div class="note warn">'+t('dupWarn')+'</div>';
+    }
+  }
+  if (i===1){
+    h += '<div class="'+qcls('vtName')+'">'+lbl('q_vtName',1,'vtName')+inp('vtName','text','autocomplete="off"')+err('vtName')+'</div>';
+    h += '<div class="'+qcls('vtPhone')+'">'+lbl('q_vtPhone',1,'vtPhone')+'<div class="hint">'+t('h_mob')+'</div>'+inp('vtPhone','tel','inputmode="numeric" maxlength="16"')+err('vtPhone')+'</div>';
+    h += '<div class="'+qcls('vtGender')+'">'+lbl('q_vtGender',1,'vtGender')+'<select data-k="vtGender">'+opt('',t('sel'),d.vtGender)+opt('Male',t('male'),d.vtGender)+opt('Female',t('female'),d.vtGender)+opt('Other',t('other'),d.vtGender)+'</select>'+err('vtGender')+'</div>';
+  }
+  if (i===2){
+    var vl = vtpList();
+    h += '<div class="'+qcls('vtp')+'">'+lbl('q_vtp',1,'vtp')+'<div class="hint">'+t('h_vtp')+'</div><div class="ta">'+inp('vtp','text','autocomplete="off" id="fVtp"')+'<div class="sugg hide" id="sgV"></div></div>'+
+      '<div class="vtpinfo" id="vtpInfo">'+vtpInfo()+'</div>'+err('vtp')+'</div>';
+  }
+  if (i===3){
+    h += '<div class="'+qcls('classes')+'">'+lbl('q_classes',1,'classes')+'<div class="hint">'+t('h_classes')+'</div><div class="chips">';
+    [9,10,11,12].forEach(function(c){ var on = d.classes.indexOf(c)>=0;
+      h += '<label class="'+(on?'on':'')+'"><input type="checkbox" data-cls="'+c+'" '+(on?'checked':'')+'>'+t('cls',{n:c})+'</label>'; });
+    h += '</div>'+err('classes')+'</div>';
+    var cs = d.classes.slice().sort(function(a,b){return a-b;});
+    function trio(c, pre){ var e = d.enrol[c] || {}, k = 'enrol.'+c+'.', em = '';
+      if (S.showErr){ var msgs = {}; ['b','g'].forEach(function(x){ if (S.errs[k+pre+x]) msgs[S.errs[k+pre+x]] = 1; }); em = Object.keys(msgs).map(function(m){ return '<div class="errmsg">'+esc(m)+'</div>'; }).join(''); }
+      return '<div class="rep"><h3>'+t('cls',{n:c})+'</h3><div class="grid3">'+
+        '<div class="'+qcls(k+pre+'b')+'"><label class="ql">'+t('boys')+' <span class="req">*</span></label>'+inp(k+pre+'b','number','inputmode="numeric" min="0" max="9999"')+'</div>'+
+        '<div class="'+qcls(k+pre+'g')+'"><label class="ql">'+t('girls')+' <span class="req">*</span></label>'+inp(k+pre+'g','number','inputmode="numeric" min="0" max="9999"')+'</div>'+
+        '<div class="q"><label class="ql">'+t('total')+'</label><input type="text" readonly id="tot'+pre+c+'" value="'+tot(e,pre)+'"></div></div>'+em+'</div>'; }
+    if (cs.length && S.cur.clsPrefilled) h += '<div class="note">'+t('prefillCls')+'</div>';
+    cs.forEach(function(c){
+      var e = d.enrol[c] || {}, k = 'enrol.'+c+'.';
+      function three(pre){ var em = '';
+        if (S.showErr){ var msgs = {}; ['b','g'].forEach(function(x){ if (S.errs[k+pre+x]) msgs[S.errs[k+pre+x]] = 1; }); em = Object.keys(msgs).map(function(m){ return '<div class="errmsg">'+esc(m)+'</div>'; }).join(''); }
+        return '<div class="grid3">'+
+          '<div class="'+qcls(k+pre+'b')+'"><label class="ql">'+t('boys')+' <span class="req">*</span></label>'+inp(k+pre+'b','number','inputmode="numeric" min="0" max="9999"')+'</div>'+
+          '<div class="'+qcls(k+pre+'g')+'"><label class="ql">'+t('girls')+' <span class="req">*</span></label>'+inp(k+pre+'g','number','inputmode="numeric" min="0" max="9999"')+'</div>'+
+          '<div class="q"><label class="ql">'+t('total')+'</label><input type="text" readonly id="tot'+pre+c+'" value="'+tot(e,pre)+'"></div></div>'+em; }
+      h += '<div class="rep"><h3>'+t('cls',{n:c})+'</h3>'+
+        '<div class="sub">'+t('secClass')+'</div>'+three('c')+
+        '<div class="sub">'+esc(t('secVE',{r:d.jobRole||''}))+'</div>'+three('v')+'</div>';
+    });
+    if (d.classes.length) h += '<div class="tot" id="gTot">'+grand()+'</div>';
+  }
+  if (i===4){
+    h += '<div class="q">'+lbl('q_nPlaces',1,'nPlaces')+'<div class="hint">'+t('h_nPlaces')+'</div><select data-k="nPlaces" data-re="1">';
+    for (var n=4;n<=10;n++) h += opt(String(n),String(n),d.nPlaces);
+    h += '</select></div>';
+    for (var p=0;p<+d.nPlaces;p++){
+      var b = 'places.'+p+'.';
+      h += '<div class="rep"><h3>'+t('place',{n:p+1})+'</h3>'+
+        '<div class="'+qcls(b+'owner')+'"><label class="ql">'+t('q_owner')+' <span class="req">*</span></label>'+inp(b+'owner','text','autocomplete="off"')+err(b+'owner')+'</div>'+
+        '<div class="'+qcls(b+'addr')+'"><label class="ql">'+t('q_addr')+' <span class="req">*</span></label><textarea data-k="'+b+'addr" rows="2">'+esc(getP(b+'addr'))+'</textarea>'+err(b+'addr')+'</div>'+
+        '<div class="'+qcls(b+'pin')+'"><label class="ql">'+t('q_pin')+' <span class="req">*</span></label><div class="hint">'+t('h_pin')+'</div>'+inp(b+'pin','tel','inputmode="numeric" maxlength="6"')+err(b+'pin')+'</div>'+
+        '<div class="'+qcls(b+'phone')+'"><label class="ql">'+t('q_pphone')+' <span class="req">*</span></label><div class="hint">'+t('h_mob')+'</div>'+inp(b+'phone','tel','inputmode="numeric" maxlength="16"')+err(b+'phone')+'</div>'+
+        '<div class="'+qcls(b+'alt')+'"><label class="ql">'+t('q_alt')+'</label><div class="hint">'+t('h_alt')+'</div>'+inp(b+'alt','tel','inputmode="numeric" maxlength="16"')+err(b+'alt')+'</div>'+
+        '<div class="'+qcls(b+'land')+'"><label class="ql">'+t('q_land')+'</label><div class="hint">'+t('h_land')+'</div>'+inp(b+'land','tel','inputmode="numeric" maxlength="16"')+err(b+'land')+'</div>'+
+        '<div class="'+qcls(b+'email')+'"><label class="ql">'+t('q_email')+'</label><div class="hint">'+t('h_email')+'</div>'+inp(b+'email','email','autocomplete="off" autocapitalize="off"')+err(b+'email')+'</div></div>';
+    }
+  }
+  if (i===5) h += review();
+  return h + '</div></section>';
+}
+function num(v){ return v===''||v==null||isNaN(+v) ? 0 : +v; }
+function tot(e, pre){ var b = e[pre+'b'], g = e[pre+'g']; return (b===''||b==null) && (g===''||g==null) ? '' : num(b)+num(g); }
+function grand(){ var d = S.cur.data, z = {cb:0,cg:0,vb:0,vg:0}; d.classes.forEach(function(c){ var e=d.enrol[c]||{}; for (var k in z) z[k] += num(e[k]); });
+  return '<div style="width:100%"><div style="opacity:.85;font-size:13px">'+t('allCls')+'</div>'+
+    '<div style="display:flex;justify-content:space-between"><span>'+t('classTot')+'</span><span>'+t('boys')+' '+z.cb+' · '+t('girls')+' '+z.cg+' · '+t('total')+' '+(z.cb+z.cg)+'</span></div>'+
+    '<div style="display:flex;justify-content:space-between;color:var(--gold)"><span>'+t('veTot')+'</span><span>'+t('boys')+' '+z.vb+' · '+t('girls')+' '+z.vg+' · '+t('total')+' '+(z.vb+z.vg)+'</span></div></div>'; }
+
+function review(){
+  var d = S.cur.data, h = '<dl class="rv">';
+  function row(k,v,st){ return '<dt>'+t(k)+(st!=null && S.mode==='step'?'<button class="edl" onclick="jump('+st+')">'+t('edit')+'</button>':'')+'</dt><dd>'+(v===''||v==null?'<span style="color:var(--brick)">—</span>':esc(v))+'</dd>'; }
+  h += row('q_udise',d.udise,0)+row('q_school',d.school)+row('q_district',dLabel(d.district))+row('q_block',d.block)+row('q_jrSlot',d.jobSlot ? t('q_jobRole')+' '+d.jobSlot : '')+row('q_sector',sLabel(d.sector))+row('q_jobRole',d.jobRole);
+  h += row('q_vtName',d.vtName,1)+row('q_vtPhone',d.vtPhone)+row('q_vtGender',d.vtGender?t(d.vtGender.toLowerCase()):'');
+  h += row('q_vtp',d.vtp,2);
+  h += row('q_classes',d.classes.slice().sort(function(a,b){return a-b;}).map(function(c){ var e=d.enrol[c]||{}; return t('cls',{n:c})+' – '+t('classTot')+': '+num(e.cb)+'/'+num(e.cg)+', '+t('veTot')+': '+num(e.vb)+'/'+num(e.vg)+' ('+t('boys')+'/'+t('girls')+')'; }).join(' | '),3);
+  h += row('q_nPlaces',d.nPlaces,4);
+  for (var p=0;p<+d.nPlaces;p++){ var x = d.places[p]||{}; h += '<dt>'+t('place',{n:p+1})+'</dt><dd>'+esc([x.owner,x.addr,x.pin?'PIN '+x.pin:'',x.phone,x.alt,x.land,x.email].filter(Boolean).join(' · ')||'—')+'</dd>'; }
+  h += '</dl>';
+  var ch = changeList(S.cur);
+  if (ch.length) h += '<div class="note warn"><b>'+t('changes')+'</b><br>'+ch.map(esc).join('<br>')+'</div>';
+  h += '<div style="margin-top:12px">'+pdfBtn(S.cur.id)+'</div>';
+  return h;
+}
+function jump(i){ S.step = i; render(); window.scrollTo(0,0); }
+
+/* ---- input binding ---- */
+function bindForm(){
+  var v = $('view');
+  v.oninput = function(e){ var el = e.target, k = el.getAttribute('data-k'); if (!k) return;
+    var val = el.value;
+    if (el.type==='tel'){ val = val.replace(/\D/g,''); if (k==='udise'){ if (val.length===11 && val[0]==='0') val = val.slice(1); val = val.slice(0,10); } else if (/\.pin$/.test(k)) val = val.slice(0,6); else if (/\.land$/.test(k)) val = val.slice(0,12); else val = normMob(val); if (val!==el.value) el.value = val; }
+    if (el.type==='number' && val.length>4){ val = val.slice(0,4); el.value = val; }
+    setP(k, val); touch();
+    if (k.indexOf('enrol.')===0){ var c = k.split('.')[1], en = S.cur.data.enrol[c]||{}; if ($('totc'+c)) $('totc'+c).value = tot(en,'c'); if ($('totv'+c)) $('totv'+c).value = tot(en,'v'); var g=$('gTot'); if (g) g.innerHTML = grand(); }
+    if (k==='vtp'){ onVtp(val); var vi=$('vtpInfo'); if (vi) vi.innerHTML = vtpInfo(); }
+    if (k==='udise') onUdise(val);
+    if (k==='school') onSchool(val);
+    if (S.showErr && S.errs[k]){ delete S.errs[k]; var q = el.closest ? el.closest('.q') : null; if (q){ q.className='q'; var m=q.querySelector('.errmsg'); if(m) m.parentNode.removeChild(m); } }
+  };
+  v.onchange = function(e){ var el = e.target;
+    if (el.id==='fD'){ S.filterD = el.value; return; }
+    if (el.hasAttribute('data-jrfix')){ var dd = S.cur.data; dd.jrFix = el.checked; if (!el.checked) dd.jobRole = dd.jobRoleList || dd.jobRole; delete S.errs.jobRole; saveNow(); rerender();
+      if (el.checked){ var f = document.querySelector('[data-k=jobRole]'); if (f) f.focus(); } return; }
+    if (el.hasAttribute('data-slot')){ var sc = BY_UDISE[S.cur.data.udise]; if (!sc) return; var slot = el.getAttribute('data-slot'), pr = JR[sc[slot==='1'?5:6]];
+      S.cur.data.jobSlot = slot; S.cur.data.sector = pr[0]; S.cur.data.jobRole = pr[1]; S.cur.data.jobRoleList = pr[1]; S.cur.data.jrFix = false;
+      S.cur.preload = S.cur.preload || {}; S.cur.preload.jobRole = pr[1];
+      ['jobSlot','sector','jobRole'].forEach(function(k){ delete S.errs[k]; });
+      saveNow(); rerender(); return; }
+    if (el.hasAttribute('data-cls')){ var c = +el.getAttribute('data-cls'), cl = S.cur.data.classes, ix = cl.indexOf(c);
+      if (el.checked && ix<0) cl.push(c); if (!el.checked && ix>=0) cl.splice(ix,1);
+      if (!S.cur.data.enrol[c]) S.cur.data.enrol[c] = {cb:'',cg:'',vb:'',vg:''};
+      if (el.checked){ var en = S.cur.data.enrol[c], cur = S.cur;
+        if (en.cb==='' && en.cg===''){ var src = S.recs.filter(function(o){ return o!==cur && o.data.udise===cur.data.udise && o.data.enrol && o.data.enrol[c] && o.data.enrol[c].cb!=='' && o.data.enrol[c].cb!=null; })
+            .sort(function(a,b){ return (b.updatedAt||'') > (a.updatedAt||'') ? 1 : -1; })[0];
+          if (src){ en.cb = src.data.enrol[c].cb; en.cg = src.data.enrol[c].cg; cur.clsPrefilled = true; } } }
+      saveNow(); rerender(); return; }
+    var k = el.getAttribute('data-k'); if (!k) return;
+    if (el.tagName==='SELECT'){ setP(k, el.value);
+      if (k==='nPlaces'){ var pl = S.cur.data.places; while (pl.length < +el.value) pl.push({}); } // keep extra entries in memory until submit
+      saveNow(); if (el.getAttribute('data-re') || S.cur.preload || S.cur.original) rerender(); }
+  };
+}
+function rerender(){ var y = window.pageYOffset; viewForm(); window.scrollTo(0,y); }
+
+/* ---- typeahead ---- */
+function onUdise(v){
+  var box = $('sgU');
+  if (v.length===10 && BY_UDISE[v]){ if (!S.cur.preload || S.cur.preload.udise!==v) pick(v); else box.className='sugg hide'; return; }
+  if (v.length===10){ box.innerHTML = '<div class="more" style="color:var(--brick);font-weight:700">'+t('notFound')+'</div>'; box.className='sugg'; return; }
+  if (v.length<2){ box.className='sugg hide'; return; }
+  var res = [], starts = [];
+  for (var i=0;i<SCH.length;i++){ var s = SCH[i]; if (S.filterD && DIST[s[2]]!==S.filterD) continue; var ix = s[0].indexOf(v); if (ix===0) starts.push(s); else if (ix>0) res.push(s); }
+  showSugg(box, starts.concat(res));
+}
+function onSchool(v){
+  var box = $('sgS'), q = v.trim().toLowerCase();
+  if (q.length<2){ box.className='sugg hide'; return; }
+  var words = q.split(/\s+/), res=[];
+  for (var i=0;i<SCH.length;i++){ var s=SCH[i]; if (S.filterD && DIST[s[2]]!==S.filterD) continue; var ok=true;
+    for (var w=0; w<words.length; w++) if (s[7].indexOf(words[w])<0 && s[0].indexOf(words[w])<0){ ok=false; break; }
+    if (ok) res.push(s); }
+  showSugg(box, res);
+}
+function showSugg(box, res){
+  var max = 40, h='';
+  if (!res.length) h = '<div class="more">'+t('noMatch')+'</div>';
+  res.slice(0,max).forEach(function(s){ h += '<button type="button" data-u="'+s[0]+'"><b>'+esc(s[1])+'</b><small>'+s[0]+' · '+esc(dLabel(DIST[s[2]]))+(s[3]?' · '+esc(s[3]):'')+'<br>'+esc(JR[s[5]][1])+' · '+esc(JR[s[6]][1])+'</small></button>'; });
+  if (res.length>max) h += '<div class="more">'+t('showing',{a:max,b:res.length})+'</div>';
+  box.innerHTML = h; box.className='sugg';
+  box.onclick = function(e){ var b = e.target.closest ? e.target.closest('button') : null; if (b) pick(b.getAttribute('data-u')); };
+}
+function pick(u){
+  var s = BY_UDISE[u], d = S.cur.data;
+  d.udise = s[0]; d.school = s[1]; d.district = DIST[s[2]]; d.block = s[3];
+  d.jobSlot = ''; d.sector = ''; d.jobRole = ''; ['udise','school','district','block'].forEach(function(k){ if (d[k]) delete S.errs[k]; });
+  S.cur.preload = {udise:s[0], school:s[1], district:DIST[s[2]], block:s[3]};
+  saveNow(); rerender();
+  var b = document.querySelector('[data-k=block]'); if (b && !d.block) b.focus();
+}
+
+/* ---- VTP: one open list, not tied to district / sector / school ---- */
+function normV(x){ return String(x||'').toLowerCase().replace(/[^a-z0-9ऀ-ॿ]+/g,' ').trim(); }
+// key used to treat spelling variants as the same VTP ("Pvt Ltd" / "Private Limited" / dots / case ignored)
+function vKey(x){ x = VTP_ALIAS[String(x||'').trim()] || x; return normV(x).replace(/\b(pvt|private|ltd|limited|p)\b/g,' ').replace(/\s+/g,' ').trim(); }
+function canonVtp(v){ var k = vKey(v); if (!k) return String(v||'').trim(); var hit = vtpList().filter(function(x){ return vKey(x)===k; })[0]; return hit || String(v||'').trim().replace(/\s+/g,' '); }
+function vtpList(){
+  var seen = {}, out = [];
+  VTP_DEFAULT.concat(S.vtp, S.vtpLocal).forEach(function(x){ x = String(x||'').trim(); x = VTP_ALIAS[x] || x; var n = vKey(x); if (x && !seen[n]){ seen[n]=1; out.push(x); } });
+  return out.sort(function(a,b){ return a.toLowerCase() < b.toLowerCase() ? -1 : 1; });
+}
+function vtpKnown(v){ var n = vKey(v); if (!n) return false; return vtpList().some(function(x){ return vKey(x)===n; }); }
+function vtpInfo(){
+  var v = S.cur.data.vtp, n = vtpList().length;
+  if (v && !vtpKnown(v)) return '<span class="badge edit" style="margin:4px 0 0">'+t('vtpNew')+'</span>';
+  return n ? t('vtpCount',{n:n}) : t('vtpEmpty');
+}
+function onVtp(v){
+  var box = $('sgV'); if (!box) return;
+  var words = normV(v).split(' ').filter(Boolean), all = vtpList();
+  var res = all.filter(function(x){ var n = normV(x); return words.every(function(w){ return n.indexOf(w)>=0; }); });
+  if (!all.length || (v && res.length===1 && normV(res[0])===normV(v))){ box.className='sugg hide'; return; }
+  var h = '';
+  res.slice(0,80).forEach(function(x){ h += '<button type="button" data-v="'+esc(x)+'"><b>'+esc(x)+'</b></button>'; });
+  if (!res.length){ box.className='sugg hide'; return; }
+  box.innerHTML = h; box.className = 'sugg';
+  box.onclick = function(e){ var b = e.target.closest ? e.target.closest('button') : null; if (!b) return;
+    S.cur.data.vtp = b.getAttribute('data-v'); saveNow(); box.className='sugg hide';
+    var f = $('fVtp'); if (f) f.value = S.cur.data.vtp; var vi = $('vtpInfo'); if (vi) vi.innerHTML = vtpInfo(); };
+}
+function rememberVtp(v){ v = String(v||'').trim(); if (v && !vtpKnown(v)){ S.vtpLocal.push(v); ls('sl_vtp_local', S.vtpLocal); } }
+
+/* ---- validation ---- */
+// Mobile: strip +91 / 91 / 0 prefix when the rest is a valid-looking 10-digit number, then keep 10 digits
+function normMob(v){ v = String(v||'').replace(/\D/g,''); if (v.length===12 && v.slice(0,2)==='91' && /[6-9]/.test(v[2])) v = v.slice(2); else if (v.length===11 && v[0]==='0' && /[6-9]/.test(v[1])) v = v.slice(1); return v.slice(0,10); }
+var RE_PH = /^[6-9]\d{9}$/, RE_LAND = /^0\d{9,11}$/, RE_PH_ANY = /^\d{10}$/, RE_EM = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function validate(step){
+  var d = S.cur.data, e = {}, R = t('req');
+  function rq(k){ if (String(getP(k)).trim()==='') e[k] = R; }
+  if (step===0){ rq('udise'); if (d.udise && d.udise.length!==10) e.udise = t('e_udise'); else if (d.udise && !BY_UDISE[d.udise]) e.udise = t('e_notList'); rq('school'); rq('district'); rq('block');
+    if (!d.jobSlot) e.jobSlot = R; else if (d.jrFix) rq('jobRole'); }
+  if (step===1){ rq('vtName'); if (!RE_PH.test(d.vtPhone)) e.vtPhone = d.vtPhone ? t('e_phone') : R; rq('vtGender'); }
+  if (step===2){ rq('vtp'); }
+  if (step===3){ if (!d.classes.length) e.classes = t('e_cls');
+    d.classes.forEach(function(c){ var en = d.enrol[c]||{}, k = 'enrol.'+c+'.'; ['cb','cg','vb','vg'].forEach(function(x){ var v = en[x]; if (v===''||v==null||isNaN(+v)||+v<0) e[k+x] = t('e_num'); });
+      if (!e[k+'vb'] && !e[k+'cb'] && +en.vb > +en.cb) e[k+'vb'] = t('e_veMore'); if (!e[k+'vg'] && !e[k+'cg'] && +en.vg > +en.cg) e[k+'vg'] = t('e_veMore');
+      if (!e[k+'vb'] && !e[k+'vg'] && !e[k+'cb'] && !e[k+'cg'] && (+en.cb + +en.cg) > 0 && (+en.vb + +en.vg) === 0){ e[k+'vb'] = t('e_veZero'); e[k+'vg'] = t('e_veZero'); }
+      if (!e[k+'cb'] && !e[k+'cg'] && (+en.cb + +en.cg) === 0){ e[k+'cb'] = t('e_clsZero'); e[k+'cg'] = t('e_clsZero'); } }); }
+  if (step===4){ for (var p=0;p<+d.nPlaces;p++){ var b='places.'+p+'.', x=d.places[p]||{};
+    rq(b+'owner'); rq(b+'addr'); if (!/^[1-9]\d{5}$/.test(x.pin||'')) e[b+'pin'] = x.pin ? t('e_pin') : R; if (!RE_PH.test(x.phone||'')) e[b+'phone'] = x.phone ? t('e_phone') : R;
+    if (x.alt){ if (!RE_PH.test(x.alt)) e[b+'alt'] = t('e_phone'); else if (x.alt===x.phone) e[b+'alt'] = t('e_altSame'); }
+    if (x.land && !RE_LAND.test(x.land)) e[b+'land'] = t('e_land');
+    if (x.email && !RE_EM.test(x.email.trim())) e[b+'email'] = t('e_email'); } }
+  return e;
+}
+function validateAll(){ var all = {}, first = -1; for (var i=0;i<5;i++){ var e = validate(i); for (var k in e){ all[k]=e[k]; if (first<0) first=i; } } return {errs:all, first:first}; }
+function scrollToErr(){ setTimeout(function(){ var b = document.querySelector('.q.bad, .errmsg'); if (b) b.scrollIntoView({block:'center'}); }, 30); }
+function stepGo(dir){
+  saveNow();
+  if (dir>0){ var e = validate(S.step); if (Object.keys(e).length){ S.errs = e; S.showErr = true; rerender(); toast(t('fix')); scrollToErr(); return; } }
+  S.showErr = false; S.errs = {}; S.step += dir; render(); window.scrollTo(0,0);
+}
+
+/* ---- change log (preload edits + corrections) ---- */
+var FL = {udise:'UDISE Code',school:'School Name',district:'District',block:'Block',vtName:'VT Name',vtPhone:'VT Phone',vtGender:'VT Gender',jobSlot:'Job Role No.',sector:'VE Sector',jobRole:'Job Role',vtp:'VTP Name',classes:'Classes',enrol:'Enrolment',nPlaces:'No. of OJT/EV Places',places:'OJT/EV Places'};
+function cleanData(d){ var x = clone(d); x.places = x.places.slice(0, +x.nPlaces); var en = {}; x.classes.forEach(function(c){ en[c] = x.enrol[c]; }); x.enrol = en; return x; }
+function changeList(r){
+  var out = [], d = r.data;
+  if (r.preload) ['udise','school','district','block','jobRole'].forEach(function(k){ if (r.preload[k]===undefined) return; if (String(r.preload[k]||'')!==String(d[k]||'')) out.push('Preload '+FL[k]+': "'+(r.preload[k]||'')+'" → "'+(d[k]||'')+'"'); });
+  if (r.original){ var a = cleanData(r.original), b = cleanData(d);
+    Object.keys(FL).forEach(function(k){ if (r.preload && ['udise','school','district','block','jobRole'].indexOf(k)>=0) { if (String(a[k])!==String(b[k]) && String(r.preload[k])===String(a[k])) return; }
+      if (JSON.stringify(a[k])!==JSON.stringify(b[k])) out.push(FL[k]+(typeof b[k]==='object' ? ' changed' : ': "'+a[k]+'" → "'+b[k]+'"')); }); }
+  return out;
+}
+
+/* ---- submit ---- */
+function submitForm(){
+  saveNow();
+  var v = validateAll();
+  if (v.first>=0){ S.errs = v.errs; S.showErr = true; if (S.mode==='step') S.step = v.first; render(); toast(t('fix')); scrollToErr(); return; }
+  var r = S.cur; r.status = 'pending'; r.submittedAt = nowISO(); r.updatedAt = r.submittedAt; r.lastError = '';
+  var ch = changeList(r); r.changes = ch; r.data.vtp = canonVtp(r.data.vtp); r.vtpNew = !vtpKnown(r.data.vtp); rememberVtp(r.data.vtp);
+  persist(); S.showErr=false; S.doneId = r.id; go('done');
+  syncAll(false);
+}
+function viewDone(){
+  var r = findRec(S.doneId), sent = r && r.status==='sent';
+  $('view').innerHTML = '<div class="done"><div class="ic" style="background:'+(sent?'var(--teal)':'var(--gold)')+'">'+(sent?'✓':'⇪')+'</div><h2>'+t('doneT')+'</h2><p>'+t(sent?'doneSent':'donePark')+'</p>'+
+    (r?'<p class="hint">'+esc(r.data.school)+' · '+esc(r.data.udise)+'</p>':'')+'</div>'+
+    (r ? pdfBtn(r.id)+'<div style="height:10px"></div>' : '')+'<button class="btn pri" onclick="newForm()">＋ '+t('newAgain')+'</button><div style="height:10px"></div><button class="btn out" onclick="go(\'home\')">⌂ '+t('home')+'</button>';
+}
+
+
+/* ================= PDF (one entry = one A4 page; drawn on canvas, works offline, no libraries) ================= */
+var PDF_T = {
+  en:{title:'OJT & Exposure Visit for VE – Pre-information',org:'Uttar Pradesh',id:'Entry ID',status:'Status',subAt:'Submitted on',by:'Filled by',
+      st_draft:'Draft – not submitted',st_pending:'Submitted – saved on phone, not yet sent',st_sent:'Submitted – sent to server',
+      s1:'School & Vocational Trainer details',s2:'Classes & student enrolment',s3:'Nearest places for OJT / Exposure Visit',s4:'Correction / change log',
+      cls:'Class',ce:'Class enrolment (whole school)',ve:'VE trade enrolment',b:'Boys',g:'Girls',t:'Total',all:'All classes',
+      no:'No.',owner:'Owner name',addr:'Full address',pin:'PIN',mob:'Mobile',mail:'Email',gen:'Generated on',corr:'Correction of entry',vtpNew:'(new – not in list)'},
+  hi:{title:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',org:'उत्तर प्रदेश',id:'एंट्री आईडी',status:'स्थिति',subAt:'जमा करने की तिथि',by:'भरने वाले',
+      st_draft:'ड्राफ़्ट – जमा नहीं',st_pending:'जमा – फ़ोन में सेव, अभी भेजा नहीं गया',st_sent:'जमा – सर्वर पर भेजा गया',
+      s1:'विद्यालय एवं व्यावसायिक प्रशिक्षक का विवरण',s2:'कक्षाएँ एवं छात्र नामांकन',s3:'OJT / एक्सपोज़र विज़िट के निकटतम स्थान',s4:'सुधार / बदलाव का विवरण',
+      cls:'कक्षा',ce:'कक्षा नामांकन (पूरा विद्यालय)',ve:'VE ट्रेड नामांकन',b:'बालक',g:'बालिकाएँ',t:'कुल',all:'सभी कक्षाएँ',
+      no:'क्र.',owner:'मालिक का नाम',addr:'पूरा पता',pin:'पिन',mob:'मोबाइल',mail:'ईमेल',gen:'बनाने की तिथि',corr:'इस एंट्री का सुधार',vtpNew:'(नया – सूची में नहीं)'}
+};
+function pdfBtn(id){ return '<button class="btn teal" onclick="downloadPdf(\''+id+'\')">⤓ '+t('pdf')+'</button>'; }
+function downloadPdf(id){
+  var r = findRec(id); if (!r) return;
+  if (r===S.cur) saveNow();
+  toast(t('pdfMaking'));
+  setTimeout(function(){ try { buildPdf(r, null); } catch(e){ toast(t('pdfFail')); } }, 30);
+}
+function buildPdf(r, logo){
+  var W = 794, H = 1123, SC = 2;                       // A4 at 96 dpi, drawn at 2x (≈190 dpi)
+  var cv = document.createElement('canvas'); cv.width = W*SC; cv.height = H*SC;
+  var cx = cv.getContext('2d');
+  var P = PDF_T[S.lang], fs = 13, h;
+  for (var tries = 0; tries < 8; tries++){             // shrink text until the whole entry fits one page
+    h = drawPage(cx, r, logo, P, fs, true, W, H, SC);
+    if (h <= H - 40 || fs <= 8.5) break;
+    fs -= 0.75;
+  }
+  drawPage(cx, r, logo, P, fs, false, W, H, SC);
+  var jpg = cv.toDataURL('image/jpeg', 0.88);
+  var blob = jpegToPdf(jpg, cv.width, cv.height);
+  var d = r.data, name = 'OJT_EV_' + (d.udise||'NA') + '_' + String(d.vtName||'VT').replace(/[^A-Za-z0-9\u0900-\u097F]+/g,'_').slice(0,30) + '_' + (r.submittedAt||nowISO()).slice(0,10) + '.pdf';
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(a.href); a.parentNode && a.parentNode.removeChild(a); }, 4000);
+  toast(t('pdfDone'));
+}
+function drawPage(cx, r, logo, P, fs, dry, W, H, SC){
+  var d = cleanData(r.data), M = 34, X = M + 8, CW = W - X - M, y = 0;
+  var FONT = '"Noto Sans Devanagari","Lato","Roboto",Arial,sans-serif';
+  cx.setTransform(SC,0,0,SC,0,0);
+  if (!dry){ cx.fillStyle = '#FFFFFF'; cx.fillRect(0,0,W,H);
+    cx.fillStyle = '#172B68'; cx.fillRect(0,0,8,H/3); cx.fillStyle = '#7E1B1E'; cx.fillRect(0,H/3,8,H/3); cx.fillStyle = '#E7A740'; cx.fillRect(0,2*H/3,8,H/3); }
+  function font(sz, bold){ cx.font = (bold?'700 ':'400 ') + sz + 'px ' + FONT; }
+  function wrap(txt, w, sz, bold){
+    font(sz, bold); txt = String(txt==null?'':txt); var out = [];
+    txt.split('\n').forEach(function(para){
+      var words = para.split(/\s+/), line = '';
+      words.forEach(function(wd){
+        while (cx.measureText(wd).width > w && wd.length > 1){        // very long word (e-mail etc.) – hard break
+          var k = wd.length; while (k > 1 && cx.measureText((line?line+' ':'') + wd.slice(0,k)).width > w) k--;
+          if (k <= 1 && line){ out.push(line); line=''; continue; }
+          out.push((line?line+' ':'') + wd.slice(0,k)); line=''; wd = wd.slice(k);
+        }
+        var test = line ? line + ' ' + wd : wd;
+        if (cx.measureText(test).width > w && line){ out.push(line); line = wd; } else line = test;
+      });
+      out.push(line);
+    });
+    return out;
+  }
+  function text(str, x, yy, sz, bold, color, align){ if (dry) return; font(sz,bold); cx.fillStyle = color||'#1D3256'; cx.textAlign = align||'left'; cx.textBaseline = 'top'; cx.fillText(str, x, yy); cx.textAlign='left'; }
+  // table: cols = widths (fractions), rows = [[cell…]], o = {head:bool, shade:[colIdx], align:[…], bold:[colIdx], foot:bool}
+  function table(cols, rows, o){
+    o = o || {}; var pad = 5, lh = fs*1.42;
+    var ws = cols.map(function(f){ return f*CW; });
+    rows.forEach(function(row, ri){
+      var isHead = o.head && ri===0, isFoot = o.foot && ri===rows.length-1, cells = [], nl = 1;
+      row.forEach(function(c, ci){ var bold = isHead || isFoot || (o.bold && o.bold.indexOf(ci)>=0);
+        var lines = wrap(c, ws[ci]-2*pad, isHead ? fs-1 : fs, bold); cells.push({l:lines,b:bold}); nl = Math.max(nl, lines.length); });
+      var rh = nl*lh + 2*pad - 2, x = X;
+      if (!dry){
+        cells.forEach(function(c, ci){
+          var bg = isHead ? '#172B68' : isFoot ? '#F2ECE0' : (o.shade && o.shade.indexOf(ci)>=0) ? '#EEF1FA' : (ri%2===0 ? '#FFFFFF' : '#FAF8F3');
+          cx.fillStyle = bg; cx.fillRect(x, y, ws[ci], rh);
+          cx.strokeStyle = '#B5B5AF'; cx.lineWidth = 0.6; cx.strokeRect(x, y, ws[ci], rh);
+          var al = (o.align && o.align[ci]) || 'left', tx = al==='center' ? x+ws[ci]/2 : x+pad;
+          c.l.forEach(function(ln, li){ text(ln, tx, y+pad+li*lh, isHead ? fs-1 : fs, c.b, isHead ? '#FFFFFF' : (o.shade && o.shade.indexOf(ci)>=0) ? '#5A6378' : '#1D3256', al); });
+          x += ws[ci];
+        });
+      }
+      y += rh;
+    });
+  }
+  function section(title){ y += fs*0.9; text(title, X, y, fs+2.5, true, '#172B68'); y += (fs+2.5)*1.35;
+    if (!dry){ cx.fillStyle = '#E7A740'; cx.fillRect(X, y, 46, 2); } y += 7; }
+
+  // ---- header
+  y = M - 6;
+  text(P.title, X, y + 4, 19, true, '#172B68');
+  text(P.org, X, y + 31, 12.5, false, '#5A6378');
+  y += 52; if (!dry){ cx.fillStyle = '#E7A740'; cx.fillRect(X, y, CW, 2.5); } y += 10;
+
+  // ---- meta strip
+  var st = r.status==='sent' ? P.st_sent : r.status==='pending' ? P.st_pending : P.st_draft;
+  table([.16,.34,.16,.34], [[P.id, r.id, P.status, st], [P.subAt, fmtFull(r.submittedAt), P.by, (r.data.vtName||'') + (r.data.vtPhone ? ' (' + r.data.vtPhone + ')' : '') + ' – VT']]
+    .concat(r.recordType==='Correction' ? [[P.corr, r.parentId||'', '', '']] : []), {shade:[0,2], bold:[1,3]});
+
+  // ---- school & VT
+  section(P.s1);
+  var g = d.vtGender ? T[S.lang][d.vtGender.toLowerCase()] || d.vtGender : '';
+  table([.16,.34,.16,.34], [
+    [t('q_udise'), d.udise, t('q_school'), d.school],
+    [t('q_district'), dLabel(d.district), t('q_block'), d.block],
+    [t('q_vtName'), d.vtName, t('q_vtPhone'), d.vtPhone],
+    [t('q_jobRole'), (d.jobSlot ? d.jobSlot+'. ' : '') + (d.jobRole||'') + (d.jrFix && d.jobRoleList && d.jobRoleList!==d.jobRole ? ' ('+t('edited')+'; '+d.jobRoleList+')' : ''), t('q_sector'), sLabel(d.sector)],
+    [t('q_vtGender'), g, '', ''],
+    [t('q_vtp'), d.vtp + (r.vtpNew ? ' ' + P.vtpNew : ''), t('q_classes'), d.classes.slice().sort(function(a,b){return a-b;}).map(function(c){ return c; }).join(', ')]
+  ], {shade:[0,2], bold:[1,3]});
+
+  // ---- enrolment
+  section(P.s2);
+  var cs = d.classes.slice().sort(function(a,b){return a-b;}), z = {cb:0,cg:0,vb:0,vg:0};
+  cs.forEach(function(c){ var e = d.enrol[c]||{}; for (var k in z) z[k] += num(e[k]); });
+  var W7 = [.16,.14,.14,.14,.14,.14,.14], A7 = ['left','center','center','center','center','center','center'];
+  table([.16,.42,.42], [[P.cls, P.ce, P.ve + ' – ' + (d.jobRole||'')]], {head:true, align:['left','center','center']});
+  var er = [['', P.b, P.g, P.t, P.b, P.g, P.t]];
+  cs.forEach(function(c){ var e = d.enrol[c]||{}; er.push([t('cls',{n:c}), num(e.cb), num(e.cg), num(e.cb)+num(e.cg), num(e.vb), num(e.vg), num(e.vb)+num(e.vg)]); });
+  er.push([P.all, z.cb, z.cg, z.cb+z.cg, z.vb, z.vg, z.vb+z.vg]);
+  table(W7, er, {head:true, foot:true, align:A7});
+
+  // ---- places
+  section(P.s3 + ' (' + d.nPlaces + ')');
+  var pr = [[P.no, P.owner, P.addr, P.pin, t('contact'), P.mail]];
+  d.places.forEach(function(p, i){ pr.push([i+1, p.owner||'', p.addr||'', p.pin||'', [p.phone ? 'M: '+p.phone : '', p.alt ? 'M2: '+p.alt : '', p.land ? 'LL: '+p.land : ''].filter(Boolean).join('\n'), p.email||'—']); });
+  table([.06,.18,.31,.09,.17,.19], pr, {head:true, align:['center','left','left','center','left','left']});
+
+  // ---- change log
+  if (r.changes && r.changes.length){ section(P.s4); table([1], r.changes.map(function(c){ return [c]; })); }
+
+  // ---- footer
+  y += 12;
+  text(P.gen + ': ' + fmtFull(nowISO()) + '   ·   v' + APP_VERSION, X, Math.max(y, H - 30), 10, false, '#5A6378');
+  return y + 14;
+}
+function fmtFull(ts){ return ts ? ts.slice(8,10)+'-'+ts.slice(5,7)+'-'+ts.slice(0,4)+' '+ts.slice(11,16) : '—'; }
+function jpegToPdf(dataUrl, pw, ph){
+  var bin = atob(dataUrl.split(',')[1]), img = new Uint8Array(bin.length);
+  for (var i=0;i<bin.length;i++) img[i] = bin.charCodeAt(i);
+  var A4w = 595.28, A4h = 841.89, parts = [], len = 0, offs = [];
+  function add(x){ var u = typeof x === 'string' ? new Uint8Array(x.split('').map(function(c){ return c.charCodeAt(0) & 255; })) : x; parts.push(u); len += u.length; }
+  function obj(n, body){ offs[n] = len; add(n + ' 0 obj\n' + body + '\nendobj\n'); }
+  add('%PDF-1.4\n%\xE2\xE3\xCF\xD3\n');
+  obj(1, '<< /Type /Catalog /Pages 2 0 R >>');
+  obj(2, '<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+  obj(3, '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+A4w+' '+A4h+'] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+  offs[4] = len; add('4 0 obj\n<< /Type /XObject /Subtype /Image /Width '+pw+' /Height '+ph+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+img.length+' >>\nstream\n'); add(img); add('\nendstream\nendobj\n');
+  var cs = 'q '+A4w+' 0 0 '+A4h+' 0 0 cm /Im0 Do Q';
+  obj(5, '<< /Length '+cs.length+' >>\nstream\n'+cs+'\nendstream');
+  obj(6, '<< /Producer (VE OJT-EV App) /Title (OJT EV Pre-information) >>');
+  var xref = len, x = 'xref\n0 7\n0000000000 65535 f \n';
+  for (var n=1;n<=6;n++) x += ('0000000000' + offs[n]).slice(-10) + ' 00000 n \n';
+  add(x + 'trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n' + xref + '\n%%EOF');
+  return new Blob(parts, {type:'application/pdf'});
+}
+
+/* ================= SYNC ================= */
+function payload(r){
+  var d = cleanData(r.data), edited = r.recordType==='Correction' || (r.changes && r.changes.length);
+  return {id:r.id, parentId:r.parentId||'', recordType:r.recordType, deviceSubmittedAt:r.submittedAt, 
+    udise:d.udise, school:d.school, district:d.district, block:d.block, vtName:d.vtName.trim(), vtPhone:d.vtPhone, vtGender:d.vtGender,
+    jobSlot:d.jobSlot, sector:d.sector, jobRole:(d.jobRole||'').trim().replace(/\s+/g,' '), jobRoleList:d.jobRoleList||d.jobRole||'', jobRoleCorrected:!!(d.jrFix && (d.jobRole||'').trim() !== (d.jobRoleList||'')), vtp:d.vtp.trim(), vtpIsOther:r.vtpNew!==undefined ? r.vtpNew : !vtpKnown(d.vtp),
+    classes:d.classes.slice().sort(function(a,b){return a-b;}),
+    enrol:d.classes.slice().sort(function(a,b){return a-b;}).map(function(c){ var e=d.enrol[c]||{}; return {cls:c, cb:num(e.cb), cg:num(e.cg), ct:num(e.cb)+num(e.cg), vb:num(e.vb), vg:num(e.vg), vt:num(e.vb)+num(e.vg)}; }),
+    nPlaces:+d.nPlaces, places:d.places.map(function(p,i){ return {no:i+1, owner:(p.owner||'').trim(), addr:(p.addr||'').trim(), pin:p.pin||'', phone:p.phone||'', alt:p.alt||'', land:p.land||'', email:(p.email||'').trim()}; }),
+    editedBy: edited ? (d.vtName||'').trim() : '', editedAt: edited ? r.submittedAt : '', changes:(r.changes||[]).join(' | '), lang:S.lang, appVersion:APP_VERSION};
+}
+function post(body){
+  return new Promise(function(res, rej){
+    var done = false, to = setTimeout(function(){ if(!done){ done=true; rej(new Error('timeout')); } }, 30000);
+    fetch(S.url, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(body), redirect:'follow'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if(!done){ done=true; clearTimeout(to); res(j); } })
+      .catch(function(e){ if(!done){ done=true; clearTimeout(to); rej(e); } });
+  });
+}
+function syncAll(manual, onlyId){
+  if (S.syncing) return;
+  var list = S.recs.filter(function(r){ return r.status==='pending' && (!onlyId || r.id===onlyId); });
+  if (!list.length) return;
+  if (!S.url){ if (manual) toast(t('noServer')); return; }
+  if (!navigator.onLine){ if (manual) toast(t('noNet')); return; }
+  S.syncing = true; renderHeader();
+  var ok = 0, i = 0;
+  (function nxt(){
+    if (i>=list.length){ S.syncing=false; persist(); if (manual || ok) toast(ok===list.length ? t('sentOk',{n:ok}) : t('sendFail')); if (S.view!=='form') render(); else renderHeader(); return; }
+    var r = list[i++];
+    post({action:'submit', record:payload(r)}).then(function(j){
+      if (j && j.ok){ r.status='sent'; r.sentAt=nowISO(); r.lastError=''; ok++; } else { r.lastError = (j && j.error) || 'server error'; }
+      persist(); nxt();
+    }, function(e){ r.lastError = (e && e.message) || 'network'; persist(); nxt(); });
+  })();
+}
+function fetchLists(){
+  if (!S.url || !navigator.onLine) return;
+  fetch(S.url + (S.url.indexOf('?')<0?'?':'&') + 'action=lists').then(function(r){ return r.json(); }).then(function(j){
+    if (!j || !j.ok) return;
+    if (j.vtp){ S.vtp = j.vtp; ls('sl_vtp', S.vtp);
+      S.vtpLocal = S.vtpLocal.filter(function(x){ return !j.vtp.some(function(y){ return vKey(y)===vKey(x); }); }); ls('sl_vtp_local', S.vtpLocal); }
+    if (j.orders){ S.orders = j.orders.length ? j.orders : DEPT_ORDERS_DEFAULT; ls('sl_orders', S.orders); }
+    if (j.general){ S.general = (j.general.hi && j.general.hi.length) || (j.general.en && j.general.en.length) ? j.general : null; ls('sl_general', S.general); }
+    if (j.instr){ S.instr = (j.instr.hi && j.instr.hi.length) || (j.instr.en && j.instr.en.length) ? j.instr : null; ls('sl_instr', S.instr); }
+    if (S.view==='home' || S.view==='info') render();
+  }).catch(function(){});
+}
+function downloadBackup(){
+  var data = {exportedAt:nowISO(), appVersion:APP_VERSION, records:S.recs.filter(function(r){ return r.status!=='draft'; }).map(function(r){ return {status:r.status, payload:payload(r)}; })};
+  var blob = new Blob([JSON.stringify(data,null,1)], {type:'application/json'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'VE_OJT_EV_backup_'+nowISO().slice(0,10)+'.json';
+  document.body.appendChild(a); a.click(); setTimeout(function(){ document.body.removeChild(a); }, 500);
+}
+
+/* ================= BOOT ================= */
+$('lenBtn').onclick = function(){ S.lang='en'; ls('sl_lang','en'); keepScroll(); };
+$('lhiBtn').onclick = function(){ S.lang='hi'; ls('sl_lang','hi'); keepScroll(); };
+function keepScroll(){ var y = window.pageYOffset; render(); window.scrollTo(0,y); }
+$('setBtn').onclick = function(){ if (S.view==='form') saveNow(); go('settings'); };
+window.addEventListener('online', function(){ renderHeader(); syncAll(false); fetchLists(); });
+window.addEventListener('offline', renderHeader);
+document.addEventListener('visibilitychange', function(){ if (document.visibilityState==='visible') syncAll(false); else if (S.view==='form') saveNow(); });
+window.addEventListener('pagehide', function(){ if (S.view==='form') saveNow(); });
+setInterval(function(){ syncAll(false); }, 60000);
+if ('serviceWorker' in navigator && location.protocol.indexOf('http')===0){ navigator.serviceWorker.register('sw.js').catch(function(){}); }
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(function(){});
+document.addEventListener('click', function(e){ if (!(e.target.closest && e.target.closest('.ta'))) Array.prototype.forEach.call(document.querySelectorAll('.sugg'), function(b){ b.className='sugg hide'; }); });
+function vtpOpen(e){ if (e.target && e.target.id==='fVtp') onVtp(e.target.value); }
+document.addEventListener('focusin', vtpOpen); document.addEventListener('click', vtpOpen);
+render(); syncAll(false); fetchLists();
+</script>
+</body>
+</html>
