@@ -165,7 +165,7 @@ footer{font-size:12px;color:var(--muted);text-align:center;margin-top:24px}
 /* ================= CONFIG ================= */
 // Paste your Apps Script Web App URL (ends with /exec) here before hosting.
 var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzlG27-6sfMSr8J2tCZyjutFfUatXbnqc09Q6Y1E_sdzxcfVC0Zz-1FUE_wWkZpIpd1/exec';
-var APP_VERSION = '2.4.0';
+var APP_VERSION = '2.5.0';
 // Optional starter VTP list (any VTP, not tied to district/sector/school).
 // The live list = "VTP_List" tab of the Google Sheet + every VTP name already submitted. Refreshed whenever online.
 var VTP_DEFAULT = ["AISECT", "Amass Skill Ventures Pvt. Ltd.", "Bentogreen", "DATAPRO Computers Pvt. Ltd.", "Empower Pragati Vocational and Staffing Pvt. Ltd.", "Funfirst Global Skillers Pvt. Ltd.", "Gramin Shiksha Pvt. Ltd.", "GRAS Education Training Services Pvt. Ltd.", "Indus Edutrain Pvt. Ltd.", "ITRC Technologies Pvt. Ltd.", "LabourNet Services India Pvt. Ltd.", "Mahendra Skills Training and Development Pvt. Ltd.", "Medhavi Foundation", "Pipal Tree Ventures Pvt. Ltd.", "Skill Tree Consulting Pvt. Ltd.", "Skills Root Edu Tech Consulting India Pvt. Ltd.", "Vision India Services Pvt. Ltd."];
@@ -184,11 +184,11 @@ var DEPT_ORDERS_DEFAULT = [];
    Replace by adding rows with Type = "General" in the "Notices" tab, or edit here. date = timeline / deadline (optional). */
 var GENERAL_DEFAULT = {
   hi:[{text:'यह सर्वेक्षण उत्तर प्रदेश के व्यावसायिक शिक्षा (VE) संचालित विद्यालयों में OJT एवं एक्सपोज़र विज़िट हेतु निकटतम स्थानों की पूर्व-सूचना एकत्र करने के लिए है।'},
-      {text:'प्रत्येक VE विद्यालय के प्रत्येक VT का विवरण निर्धारित समय-सीमा में भरा जाना है।', date:'विभागीय पत्र के अनुसार (शीघ्र सूचित की जाएगी)'},
+      {text:'प्रत्येक VE विद्यालय के प्रत्येक VT का विवरण निर्धारित समय-सीमा में भरा जाना है।'},
       {text:'सभी जानकारी सही एवं पूर्ण भरें। विभाग द्वारा इसी जानकारी के आधार पर OJT / एक्सपोज़र विज़िट की योजना बनाई जाएगी।'},
       {text:'किसी भी समस्या के लिए अपने ज़िला समन्वयक / सुपरवाइज़र से संपर्क करें।'}],
   en:[{text:'This survey collects pre-information on the nearest places for OJT and Exposure Visits in schools running Vocational Education (VE) in Uttar Pradesh.'},
-      {text:'Details of every VT in every VE school must be filled within the given timeline.', date:'As per department letter (to be informed soon)'},
+      {text:'Details of every VT in every VE school must be filled within the given timeline.'},
       {text:'Fill all information correctly and completely. The department will plan OJT / Exposure Visits based on this information.'},
       {text:'For any problem, contact your district coordinator / supervisor.'}]
 };
@@ -207,7 +207,7 @@ for (var i = 0; i < SCH.length; i++) { SCH[i][7] = SCH[i][1].toLowerCase(); BY_U
 
 /* ================= TEXT (EN / HI) ================= */
 var T = {
-en:{pdf:'Download PDF',pdfMaking:'Making PDF…',pdfDone:'PDF saved in Downloads',pdfFail:'Could not make the PDF on this phone',apptitle:'OJT & Exposure Visit for VE – Pre-information',brand:'OJT & Exposure Visit for VE – Pre-information',state:'Uttar Pradesh',genT:'General instructions',timeline:'Timeline',instrNext:'Next – go to forms',seeInfo:'Instructions & letters',noGen:'Department instructions will appear here.',online:'Online',offline:'Offline',pending:'{n} not sent',saved:'Saved on phone {t}',
+en:{pdf:'Download PDF',pdfMaking:'Making PDF…',pdfDone:'PDF saved in Downloads',pdfFail:'Could not make the PDF on this phone',apptitle:'OJT & Exposure Visit for VE – Pre-information',brand:'OJT & Exposure Visit for VE – Pre-information',state:'Uttar Pradesh',genT:'General instructions',timeline:'Timeline',instrNext:'Next – go to forms',seeInfo:'Instructions',noGen:'Department instructions will appear here.',online:'Online',offline:'Offline',pending:'{n} not sent',saved:'Saved on phone {t}',
 hello:'Namaste',h_mob:'10 digits, must start with 6, 7, 8 or 9 (e.g. 9876543210). +91 or 0 at the start is removed automatically.',h_alt:'Optional. 10 digits starting with 6–9; must be different from the mobile number above.',h_land:'Optional. STD code + number, starting with 0 (e.g. 0522-2345678).',h_pin:'6-digit PIN code of the place (e.g. 226001).',h_email:'Optional. e.g. name@gmail.com',q_alt:'Additional mobile number',q_land:'Landline number',e_land:'Enter landline with STD code, starting with 0 (10–12 digits)',e_altSame:'Additional mobile must be different from the mobile number',contact:'Contact numbers',jrFix:'The job role name is not correct – correct it',q_jrCorrect:'Correct job role name',h_jrCorrect:'Type the correct job role name. The sector stays the same.',e_clsZero:'Class enrolment cannot be 0 for a class the VT teaches',secClass:'Total class enrolment (whole school)',secVE:'VE enrolment – {r}',h_secClass:'All students of the class in the school, not only VE students.',h_secVE:'Students of this job role only.',prefillCls:'Filled from the other job role form of this school – check and correct if needed.',home_new:'Start new form',tile_draft:'Incomplete (drafts)',tile_pend:'On phone – not sent',tile_sent:'Sent to server',
 sendAll:'Send all now ({n})',settings:'Settings',yourName:'Your name (surveyor)',yourPhone:'Your mobile number',
 welcome:'Welcome! Enter your details once. They are saved on this phone and added to every entry.',save:'Save',
@@ -235,7 +235,7 @@ server:'Server link (admin only)',corrOf:'Correction of an earlier entry',noServ
 sentAt:'Sent {t}',savedAt:'Saved {t}',draftAt:'Last edited {t}',untitled:'(School not selected yet)',changes:'Changes that will be logged:',
 nameNeeded:'Please enter your name',appv:'App version',cancel:'Cancel',retry:'Not sent – {e}',lists:'Lists updated',sendOne:'Send now',
 unsaved:'not selected',yes:'Yes',no:'No',instrT:'Instructions for filling the form',ordersT:'Department letters – reference',noOrders:'No department letter yet. New letters will appear here.',refNo:'Letter ref. no.',dated:'Dated',viewPdf:'View letter (PDF)',pdfNet:'Internet is needed to open this letter',newTag:'New',myEntries:'My entries',instr:['Each school has 2 job roles (trades). Fill a separate form for each job role – one form per VT.','Type the 10-digit UDISE code, or 2–3 digits / letters of the school name, and choose the school from the list (only the 289 OJT schools). District and block fill automatically.','If any pre-filled detail is wrong, correct it. Your name and the time are recorded with the change.','Fill the VT name, 10-digit mobile number and gender carefully.','Choose Job role 1 or 2 – the sector and job role fill automatically. Pick the VTP from the list; if it is not there, type the full VTP name.','For each class where the VT teaches, enter the total class enrolment and the VE trade enrolment (boys and girls).','Enter at least 4 places for OJT / Exposure Visit with owner name, full address with PIN code and mobile number.','The form is saved on the phone automatically – you can fill it without internet.','After Final submit the entry goes to the server by itself when internet is available. Keep checking "On phone – not sent" and tap "Send all now" when you have network.','Do not clear Chrome data or use phone-cleaner apps until all entries are sent.']},
-hi:{pdf:'PDF डाउनलोड करें',pdfMaking:'PDF बन रही है…',pdfDone:'PDF डाउनलोड फ़ोल्डर में सेव हो गई',pdfFail:'इस फ़ोन पर PDF नहीं बन सकी',apptitle:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',brand:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',state:'उत्तर प्रदेश',genT:'सामान्य निर्देश',timeline:'समय-सीमा',instrNext:'आगे बढ़ें – फ़ॉर्म पर जाएँ',seeInfo:'निर्देश एवं पत्र',noGen:'विभागीय निर्देश यहाँ दिखाई देंगे।',sub:'OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',online:'ऑनलाइन',offline:'ऑफ़लाइन',pending:'{n} भेजना बाकी',saved:'फ़ोन में सेव {t}',
+hi:{pdf:'PDF डाउनलोड करें',pdfMaking:'PDF बन रही है…',pdfDone:'PDF डाउनलोड फ़ोल्डर में सेव हो गई',pdfFail:'इस फ़ोन पर PDF नहीं बन सकी',apptitle:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',brand:'VE हेतु OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',state:'उत्तर प्रदेश',genT:'सामान्य निर्देश',timeline:'समय-सीमा',instrNext:'आगे बढ़ें – फ़ॉर्म पर जाएँ',seeInfo:'निर्देश',noGen:'विभागीय निर्देश यहाँ दिखाई देंगे।',sub:'OJT एवं एक्सपोज़र विज़िट – पूर्व-सूचना',online:'ऑनलाइन',offline:'ऑफ़लाइन',pending:'{n} भेजना बाकी',saved:'फ़ोन में सेव {t}',
 hello:'नमस्ते',h_mob:'10 अंक, 6, 7, 8 या 9 से शुरू (जैसे 9876543210)। शुरुआत में +91 या 0 अपने-आप हट जाएगा।',h_alt:'वैकल्पिक। 6–9 से शुरू 10 अंक; ऊपर वाले मोबाइल नंबर से अलग होना चाहिए।',h_land:'वैकल्पिक। STD कोड सहित नंबर, 0 से शुरू (जैसे 0522-2345678)।',h_pin:'स्थान का 6 अंकों का पिन कोड (जैसे 226001)।',h_email:'वैकल्पिक। जैसे name@gmail.com',q_alt:'अतिरिक्त मोबाइल नंबर',q_land:'लैंडलाइन नंबर',e_land:'STD कोड सहित लैंडलाइन लिखें, 0 से शुरू (10–12 अंक)',e_altSame:'अतिरिक्त मोबाइल, मोबाइल नंबर से अलग होना चाहिए',contact:'संपर्क नंबर',jrFix:'जॉब रोल का नाम सही नहीं है – सुधार करें',q_jrCorrect:'सही जॉब रोल का नाम',h_jrCorrect:'जॉब रोल का सही नाम लिखें। सेक्टर वही रहेगा।',e_clsZero:'जिस कक्षा में VT पढ़ाते हैं, उसका कुल नामांकन 0 नहीं हो सकता',secClass:'कक्षा का कुल नामांकन (पूरा विद्यालय)',secVE:'VE नामांकन – {r}',h_secClass:'विद्यालय में कक्षा के सभी छात्र, केवल VE छात्र नहीं।',h_secVE:'केवल इस जॉब रोल के छात्र।',prefillCls:'इस विद्यालय के दूसरे जॉब रोल फ़ॉर्म से भरा गया – जाँचें और ज़रूरत हो तो सुधारें।',home_new:'नया फ़ॉर्म शुरू करें',tile_draft:'अधूरे फ़ॉर्म (ड्राफ़्ट)',tile_pend:'फ़ोन में – नहीं भेजे गए',tile_sent:'सर्वर पर भेजे गए',
 sendAll:'सभी अभी भेजें ({n})',settings:'सेटिंग्स',yourName:'आपका नाम (सर्वेयर)',yourPhone:'आपका मोबाइल नंबर',
 welcome:'स्वागत है! अपना विवरण एक बार भरें। यह इस फ़ोन में सेव रहेगा और हर एंट्री के साथ जुड़ेगा।',save:'सेव करें',
@@ -341,35 +341,21 @@ function viewHome(){
   $('view').innerHTML = h;
 }
 
-/* Opening screen: 1) General instructions + timeline  2) Form instructions  3) Letter references  → Next */
+/* Opening screen: 1) General instructions  2) Form instructions  → Next */
 function viewInfo(){
   var h = '';
   if (!S.url) h += '<div class="note bad" style="margin-top:12px">'+t('noServer')+'</div>';
   // 1. General instructions & timeline
   var gen = (S.general && S.general[S.lang] && S.general[S.lang].length) ? S.general[S.lang] : GENERAL_DEFAULT[S.lang];
   h += secT(1, t('genT')) + '<div class="card"><ol class="instr">'+gen.map(function(x){
-    return '<li>'+esc(x.text)+(x.date ? '<div><span class="tl">⏱ '+t('timeline')+': '+esc(x.date)+'</span></div>' : '')+'</li>'; }).join('')+'</ol></div>';
+    return '<li>'+esc(x.text)+'</li>'; }).join('')+'</ol></div>';
   // 2. Form instructions
   var ins = (S.instr && S.instr[S.lang] && S.instr[S.lang].length) ? S.instr[S.lang] : t('instr');
   h += secT(2, t('instrT')) + '<div class="card"><ol class="instr">'+ins.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ol></div>';
-  // 3. Letter references
-  var ords = (S.orders || []).filter(function(o){ return o && (o.ref || o.subject_hi || o.subject_en); });
-  h += secT(3, t('ordersT'));
-  if (!ords.length) h += '<div class="card" style="color:var(--muted)">'+t('noOrders')+'</div>';
-  ords.forEach(function(o, i){
-    var sub = S.lang==='hi' ? (o.subject_hi || o.subject_en) : (o.subject_en || o.subject_hi);
-    var det = S.lang==='hi' ? (o.details_hi || o.details_en) : (o.details_en || o.details_hi);
-    h += '<div class="card order">'+(i===0 ? '<span class="badge red" style="margin:0 0 6px">'+t('newTag')+'</span>' : '')+
-      '<div class="meta">'+(o.ref ? t('refNo')+': <b>'+esc(o.ref)+'</b>' : '')+(o.date ? (o.ref?' · ':'')+t('dated')+': <b>'+esc(o.date)+'</b>' : '')+'</div>'+
-      (sub ? '<h3 style="font-size:16.5px;margin:6px 0 4px">'+esc(sub)+'</h3>' : '')+
-      (det ? '<p style="margin:6px 0;white-space:pre-line">'+esc(det)+'</p>' : '')+
-      (o.pdf ? '<button class="btn out" style="min-height:42px;font-size:15px;margin-top:6px" onclick="openPdf('+i+')">📄 '+t('viewPdf')+'</button>' : '')+'</div>';
-  });
   h += '<footer>'+t('state')+' · v'+APP_VERSION+'</footer>';
   $('view').innerHTML = h;
   $('navIn').innerHTML = '<button class="btn pri" onclick="go(\'home\')">'+t('instrNext')+' ›</button>';
   $('navbar').className = 'navbar';
-  precachePdfs();
 }
 function secT(n, title){ return '<h2 class="sec-title" style="margin-top:18px"><span class="num">'+n+'</span>'+title+'</h2><hr class="rule">'; }
 function openPdf(i){
